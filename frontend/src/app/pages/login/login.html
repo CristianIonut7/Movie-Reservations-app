@@ -1,0 +1,17 @@
+<div class="login-container">
+    <h2>Autentificare Cinema</h2>
+    
+    <form (ngSubmit)="onLogin()">
+        <div>
+            <label>Email:</label>
+            <input type="email" name="email" [(ngModel)]="email" required>
+        </div>
+
+        <div>
+            <label>Parola:</label>
+            <input type="password" name="password" [(ngModel)]="password" required>
+        </div>
+
+        <button type="submit">Intră în cont</button>
+    </form>
+</div>
