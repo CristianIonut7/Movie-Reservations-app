@@ -1,6 +1,6 @@
 <div class="login-container">
     <h2>Autentificare Cinema</h2>
-    
+
     <form (ngSubmit)="onLogin()">
         <div>
             <label>Email:</label>
@@ -13,5 +13,9 @@
         </div>
 
         <button type="submit">Intră în cont</button>
+
     </form>
+    <p style="text-align: center; margin-top: 15px; font-size: 0.9rem;">
+        Nu ai cont? <a routerLink="/signup" style="color: #e50914; cursor: pointer; text-decoration: none; font-weight: bold;">Înregistrează-te aici</a>
+    </p>
 </div>

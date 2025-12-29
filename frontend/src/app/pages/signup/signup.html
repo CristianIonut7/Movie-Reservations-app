@@ -1,0 +1,26 @@
+<div class="login-container">
+    <h2>Înregistrare Cont Nou</h2>
+    <form (ngSubmit)="onSignup()">
+        <div>
+            <label>Nume:</label>
+            <input type="text" name="lastName" [(ngModel)]="userData.lastName" required>
+        </div>
+        <div>
+            <label>Prenume:</label>
+            <input type="text" name="firstName" [(ngModel)]="userData.firstName" required>
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="email" name="email" [(ngModel)]="userData.email" required>
+        </div>
+        <div>
+            <label>Parolă:</label>
+            <input type="password" name="passwordHash" [(ngModel)]="userData.passwordHash" required>
+        </div>
+        <div>
+            <label>Vârstă:</label>
+            <input type="number" name="age" [(ngModel)]="userData.age">
+        </div>
+        <button type="submit">Creează Cont</button>
+    </form>
+</div>
