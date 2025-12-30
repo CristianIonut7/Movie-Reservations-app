@@ -26,7 +26,7 @@ export class Navbar implements OnInit {
     if (user) {
       const userData = JSON.parse(user);
       this.isLoggedIn = true;
-      this.userRole = userData.role;
+      this.userRole = userData.userRole;
       this.userName = userData.firstName;
     } else {
       this.isLoggedIn = false;

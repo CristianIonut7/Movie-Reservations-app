@@ -1,0 +1,31 @@
+<div class="login-container">
+    <h2>Profilul Meu</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 20px;">
+        Email: <strong>{{ user.email }}</strong> (Nu poate fi schimbat)
+    </p>
+
+    <form (ngSubmit)="onUpdate()">
+        <div>
+            <label>Prenume:</label>
+            <input type="text" name="firstName" [(ngModel)]="user.firstName" required>
+        </div>
+        <div>
+            <label>Nume:</label>
+            <input type="text" name="lastName" [(ngModel)]="user.lastName" required>
+        </div>
+        <div>
+            <label>Vârstă:</label>
+            <input type="number" name="age" [(ngModel)]="user.age">
+        </div>
+        <div>
+            <label>Oraș:</label>
+            <input type="text" name="city" [(ngModel)]="user.city">
+        </div>
+        <div>
+            <label>Telefon:</label>
+            <input type="text" name="phoneNumber" [(ngModel)]="user.phoneNumber">
+        </div>
+
+        <button type="submit" style="background-color: #28a745;">Salvează Modificările</button>
+    </form>
+</div>
