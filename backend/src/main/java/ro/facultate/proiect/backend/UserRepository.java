@@ -27,7 +27,6 @@ public class UserRepository {
             return Optional.empty();
         }
     }
-
     // Această metodă bifează cerința de INSERT din proiect 
     public int registerUser(User user) {
         String sql = "INSERT INTO Users (FirstName, LastName, Email, PasswordHash, UserRole, Age, City, PhoneNumber) " +

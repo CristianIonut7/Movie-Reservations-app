@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.HashMap;
 import java.util.Optional;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -27,21 +29,25 @@ public class AuthController {
         public String getPassword() { return password; }
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> handleLogin(@RequestBody LoginRequest loginData) {
-        Optional<User> userOptional = userRepository.findByEmail(loginData.getEmail());
+// În AuthController.java
+@PostMapping("/login")
+public ResponseEntity<?> handleLogin(@RequestBody LoginRequest loginData) {
+    Optional<User> userOptional = userRepository.findByEmail(loginData.getEmail());
 
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            // Verificăm dacă parola introdusă corespunde cu hash-ul din DB
-            if (passwordEncoder.matches(loginData.getPassword(), user.getPasswordHash())) {
-                return ResponseEntity.ok("Login OK! Welcome, " + user.getFirstName());
-            } else {
-                return ResponseEntity.status(401).body("Error: Wrong Password");
-            }
+    if (userOptional.isPresent()) {
+        User user = userOptional.get();
+        if (passwordEncoder.matches(loginData.password, user.getPasswordHash())) {
+            // Trimitem un obiect cu nume și rol, nu doar un string
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Login successful");
+            response.put("firstName", user.getFirstName());
+            response.put("role", user.getUserRole()); // 'admin' sau 'client'
+            
+            return ResponseEntity.ok(response);
         }
-        return ResponseEntity.status(404).body("Error: User doesn't exist");
     }
+    return ResponseEntity.status(401).body("Date invalide");
+}
 
     @PostMapping("/signup")
     public ResponseEntity<String> handleSignup(@RequestBody User newUser) {

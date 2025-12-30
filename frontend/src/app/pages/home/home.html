@@ -1,0 +1,21 @@
+<div class="home-container">
+    <h1>🎬 Program Cinema</h1>
+
+    <div class="movie-grid">
+        <div *ngFor="let s of showtimes" class="movie-card">
+            <h3>{{ s.movieTitle }}</h3>
+            
+            <div class="movie-info">
+                <p><strong>Gen:</strong> {{ s.genre }}</p>
+                <p><strong>Sala:</strong> {{ s.roomType }}</p> <p><strong>Data/Ora:</strong> {{ s.startTime | date:'dd MMM, HH:mm' }}</p>
+                <p class="price"><strong>Preț:</strong> {{ s.ticketPrice }} RON</p>
+            </div>
+
+            <button class="btn-reserve">Rezervă Bilete</button>
+        </div>
+    </div>
+
+    <div *ngIf="showtimes.length === 0" style="text-align: center; margin-top: 50px;">
+        <p>Momentan nu există difuzări programate.</p>
+    </div>
+</div>

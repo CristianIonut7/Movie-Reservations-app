@@ -1,6 +1,9 @@
 ro\facultate\proiect\backend\SecurityConfig.class
+ro\facultate\proiect\backend\ShowtimeDTO.class
 ro\facultate\proiect\backend\UserRepository.class
 ro\facultate\proiect\backend\BackendApplication.class
+ro\facultate\proiect\backend\MovieRepository.class
+ro\facultate\proiect\backend\MovieController.class
 ro\facultate\proiect\backend\AuthController$LoginRequest.class
 ro\facultate\proiect\backend\AuthController.class
 ro\facultate\proiect\backend\User.class

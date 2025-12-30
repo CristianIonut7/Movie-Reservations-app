@@ -11,28 +11,31 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './login.css',
 })
 export class Login {
-  
+
   email: string = '';
   password: string = '';
 
   http = inject(HttpClient);
   router = inject(Router);
 
+  // În login.ts, modifică onLogin:
   onLogin() {
-    const loginData = {
-      email: this.email,
-      password: this.password
-    };
+    const loginData = { email: this.email, password: this.password };
 
-    this.http.post('http://localhost:8080/api/auth/login', loginData, { responseType: 'text' })
+    // Scoatem { responseType: 'text' } pentru că acum primim JSON
+    this.http.post('http://localhost:8080/api/auth/login', loginData)
       .subscribe({
         next: (response: any) => {
-          alert('Succes: ' + response);
+          // SALVĂM DATELE AICI
+          localStorage.setItem('currentUser', JSON.stringify(response));
+
+          alert('Bine ai venit, ' + response.firstName);
+          this.router.navigate(['/home']);
+
+          // Forțăm un refresh mic sau anunțăm navbar-ul (vezi pasul 3)
+          window.location.reload();
         },
-        error: (error: any) => {
-          console.error(error);
-          alert('Eroare: Login eșuat! Verifică consola.');
-        }
+        error: (error) => alert('Login eșuat!')
       });
   }
 }
