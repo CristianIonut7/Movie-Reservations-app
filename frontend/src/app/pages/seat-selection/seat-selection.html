@@ -1,0 +1,25 @@
+<div class="booking-container">
+    <h2>Selectează Locurile</h2>
+    
+    <div class="screen">ECRAN</div>
+
+    <div class="seats-grid">
+        <div *ngFor="let seat of seats" 
+             class="seat" 
+             [ngClass]="{'occupied': seat.occupied, 'selected': isSelected(seat.seatId)}"
+             (click)="toggleSeat(seat)">
+            {{ seat.seatNumber }}
+        </div>
+    </div>
+
+    <div class="legend">
+        <span><span class="box free"></span> Liber</span>
+        <span><span class="box taken"></span> Ocupat</span>
+        <span><span class="box selected-box"></span> Selectat</span>
+    </div>
+
+    <div class="summary" *ngIf="selectedSeatIds.length > 0">
+        <p>Ai selectat {{ selectedSeatIds.length }} locuri.</p>
+        <button (click)="confirmBooking()">Confirmă Rezervarea</button>
+    </div>
+</div>

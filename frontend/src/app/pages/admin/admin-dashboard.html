@@ -1,0 +1,29 @@
+<div class="admin-container">
+    <h1>🛡️ Panou Administrare Cinema</h1>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>🔥 Top 3 Filme Populare</h3>
+            <ul>
+                <li *ngFor="let m of topMovies">
+                    {{ m.Title }} - <strong>{{ m.ReservationCount }} bilete</strong>
+                </li>
+            </ul>
+        </div>
+
+        <div class="stat-card">
+            <h3>💎 Clienți care cheltuie peste medie</h3>
+            <ul>
+                <li *ngFor="let c of vipClients">
+                    {{ c.FirstName }} {{ c.LastName }} ({{ c.Email }})
+                    <button (click)="promoteUser(c.Email)" class="mini-btn">Fă-l Admin</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="management-section">
+        <h3>⚙️ Gestionare Rapidă</h3>
+        <p>Aici poți adăuga restul de operații de management (Update prețuri, Delete difuzări etc.)</p>
+    </div>
+</div>
