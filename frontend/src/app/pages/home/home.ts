@@ -17,6 +17,7 @@ export class Home implements OnInit {
   ngOnInit(): void {
     this.movieService.getShowtimes().subscribe({
       next: (data) => {
+        console.log('DATE PRIMITE DE LA SERVER:', data); // VEZI ASTA ÎN CONSOLĂ (F12)
         this.showtimes = data;
         console.log('Program încărcat cu succes!');
       },

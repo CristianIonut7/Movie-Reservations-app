@@ -20,12 +20,35 @@ export class SeatSelection implements OnInit {
   selectedSeatIds: number[] = [];
   userId!: number;
 
+  getRowLabel(rowNum: number): string {
+    return String.fromCharCode(64 + rowNum);
+  }
+
+  get rows() {
+    const rowsMap = new Map<number, any[]>();
+    this.seats.forEach(seat => {
+      if (!rowsMap.has(seat.rowNumber)) {
+        rowsMap.set(seat.rowNumber, []);
+      }
+      rowsMap.get(seat.rowNumber)?.push(seat);
+    });
+    // Returnăm rândurile sortate
+    return Array.from(rowsMap.values()).sort((a, b) => a[0].rowNumber - b[0].rowNumber);
+  }
+
   ngOnInit() {
     this.showtimeId = Number(this.route.snapshot.paramMap.get('id'));
-    
-    // Luăm ID-ul utilizatorului din localStorage (salvat la login)
-    const userData = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    this.userId = userData.userId; // Asigură-te că obiectul User din Java include acum și câmpul userId
+
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) {
+      const userData = JSON.parse(savedUser);
+
+      // MODIFICAREA ESTE AICI:
+      // Folosim .userID (cu ID mare) exact cum apare în consola ta
+      this.userId = userData.userID;
+
+      console.log("ID-ul utilizatorului a fost setat cu succes:", this.userId);
+    }
 
     this.loadSeats();
   }
@@ -51,16 +74,13 @@ export class SeatSelection implements OnInit {
   }
 
   confirmBooking() {
-    if (this.selectedSeatIds.length === 0) {
-      alert("Te rog selectează cel puțin un loc!");
-      return;
-    }
-
     const payload = {
-      userId: this.userId,
+      userId: this.userId, // Aici va fi valoarea 2
       showtimeId: this.showtimeId,
       seatIds: this.selectedSeatIds
     };
+
+    console.log("Trimit rezervarea pentru user-ul:", payload.userId);
 
     this.http.post('http://localhost:8080/api/bookings/reserve', payload, { responseType: 'text' })
       .subscribe({

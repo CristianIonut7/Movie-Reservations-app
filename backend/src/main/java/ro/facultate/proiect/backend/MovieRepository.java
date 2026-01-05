@@ -13,11 +13,17 @@ public class MovieRepository {
     private JdbcTemplate jdbcTemplate;
 
     public List<ShowtimeDTO> getAllShowtimes() {
-        // Interogare simplă (JOIN) între 3 tabele 
-        String sql = "SELECT m.Title as movieTitle, m.Genre, r.RoomType, s.StartTime, s.TicketPrice " +
-                     "FROM Showtimes s " +
-                     "JOIN Movies m ON s.MovieID = m.MovieID " +
-                     "JOIN Rooms r ON s.RoomID = r.RoomID";
+        // Interogare simplă (JOIN) între 3 tabele
+        String sql = "SELECT s.ShowtimeID AS showtimeId, " +
+                "m.Title AS movieTitle, " + 
+                "m.Genre AS genre, " +
+                "r.RoomType AS roomType, " +
+                "s.StartTime AS startTime, " +
+                "s.TicketPrice AS ticketPrice, " +
+                "s.ShowtimeID AS showtimeId " + // ADĂUGĂM ȘI ID-UL PENTRU REZERVARE!
+                "FROM Showtimes s " +
+                "JOIN Movies m ON s.MovieID = m.MovieID " +
+                "JOIN Rooms r ON s.RoomID = r.RoomID";
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ShowtimeDTO.class));
     }
