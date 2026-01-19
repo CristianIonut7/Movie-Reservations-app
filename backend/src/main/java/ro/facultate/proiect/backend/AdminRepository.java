@@ -25,16 +25,16 @@ public class AdminRepository {
         return jdbcTemplate.queryForList(sql);
     }
 
-    // 2. [Complex 2] Subcerere în clauza WHERE: Clienți VIP (cheltuieli peste medie)
+    // 2. [Complex 2] Subcerere în clauza WHERE: Clienți VIP (exclude admini, cheltuieli reale)
     public List<Map<String, Object>> getVipClients() {
-        String sql = "SELECT FirstName, LastName, Email, (SELECT SUM(s2.TicketPrice) FROM Bookings b2 JOIN Showtimes s2 ON b2.ShowtimeID = s2.ShowtimeID WHERE b2.UserID = u.UserID) as TotalSpent " +
+        String sql = "SELECT FirstName, LastName, Email, " +
+                     "(SELECT SUM(b2.PaidPrice) FROM Bookings b2 WHERE b2.UserID = u.UserID) as TotalSpent " +
                      "FROM Users u " +
-                     "WHERE u.UserID IN ( " +
+                     "WHERE u.UserRole != 'admin' AND u.UserID IN ( " +
                      "  SELECT b.UserID FROM Bookings b " +
-                     "  JOIN Showtimes s ON b.ShowtimeID = s.ShowtimeID " +
                      "  GROUP BY b.UserID " +
-                     "  HAVING SUM(s.TicketPrice) > (SELECT AVG(TicketPrice) FROM Showtimes)" +
-                     ")";
+                     "  HAVING SUM(b.PaidPrice) > (SELECT AVG(TicketPrice) FROM Showtimes) " +
+                     ") ORDER BY TotalSpent DESC";
         return jdbcTemplate.queryForList(sql);
     }
 
@@ -49,9 +49,9 @@ public class AdminRepository {
         return jdbcTemplate.queryForList(sql);
     }
 
-    // 4. [Simple 1] Venituri generate per Film (JOIN Movie-Showtime-Booking)
+    // 4. [Simple 1] Venituri generate per Film (suma PaidPrice)
     public List<Map<String, Object>> getRevenuePerMovie() {
-        String sql = "SELECT m.Title, SUM(s.TicketPrice) as TotalRevenue " +
+        String sql = "SELECT m.Title, SUM(b.PaidPrice) as TotalRevenue " +
                      "FROM Movies m " +
                      "JOIN Showtimes s ON m.MovieID = s.MovieID " +
                      "JOIN Bookings b ON s.ShowtimeID = b.ShowtimeID " +
