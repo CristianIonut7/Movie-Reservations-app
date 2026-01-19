@@ -6,7 +6,7 @@
     <!-- Info Puncte -->
     <div
         style="background-color: var(--bg-card); padding: 10px; border-radius: 5px; text-align: center; margin-bottom: 20px; border: 1px solid #333;">
-        <span style="color: var(--primary-color); font-size: 1.2rem;">💎 Puncte de Loialitate: <strong>{{
+        <span style="color: var(--primary-color); font-size: 1.2rem;">Puncte de Loialitate: <strong>{{
                 user.loyaltyPoints
                 }}</strong></span>
     </div>
@@ -25,11 +25,11 @@
             <input type="text" name="lastName" [(ngModel)]="user.lastName" required>
         </div>
         <div>
-            <label>Vârstă:</label>
+            <label>Varsta:</label>
             <input type="number" name="age" [(ngModel)]="user.age">
         </div>
         <div>
-            <label>Oraș:</label>
+            <label>Oras:</label>
             <input type="text" name="city" [(ngModel)]="user.city">
         </div>
         <div>
@@ -37,31 +37,31 @@
             <input type="text" name="phoneNumber" [(ngModel)]="user.phoneNumber">
         </div>
 
-        <button type="submit" class="btn-primary" style="margin-bottom: 2rem;">Salvează Modificările</button>
+        <button type="submit" class="btn-primary" style="margin-bottom: 2rem;">Salveaza Modificarile</button>
     </form>
 
     <hr style="border: 1px solid #444; margin-bottom: 2rem;">
 
-    <h3>🔒 Securitate</h3>
+    <h3>Securitate</h3>
     <form (ngSubmit)="onChangePassword()">
         <div>
             <label>Parola Veche:</label>
             <input type="password" name="oldPass" [(ngModel)]="passwordData.oldPassword" required>
         </div>
         <div>
-            <label>Parola Nouă:</label>
+            <label>Parola Noua:</label>
             <input type="password" name="newPass" [(ngModel)]="passwordData.newPassword" required>
         </div>
-        <button type="submit" class="btn-primary" style="background-color: var(--danger-color);">Schimbă Parola</button>
+        <button type="submit" class="btn-primary" style="background-color: var(--danger-color);">Schimba Parola</button>
     </form>
 
     <hr style="border: 1px solid #444; margin: 2rem 0;">
 
     <div style="text-align: center;">
-        <h3 style="color: var(--danger-color);">⚠️ Zăna Periculoasă</h3>
+        <h3 style="color: var(--danger-color);">Zona Periculoasa</h3>
         <button (click)="onDeleteAccount()"
             style="background-color: transparent; border: 2px solid var(--danger-color); color: var(--danger-color); margin-top: 10px;">
-            🗑️ Șterge Contul
+            Sterge Contul
         </button>
     </div>
 </div>

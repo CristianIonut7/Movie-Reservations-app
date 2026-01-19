@@ -2,31 +2,86 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: var(--bg-card);
-  /* Consistent dark card background */
+  padding: 1rem 3rem;
+  background-color: rgba(31, 31, 31, 0.95);
+  /* Semi-transparent dark */
+  backdrop-filter: blur(10px);
+  /* Glass effect */
   color: var(--text-color);
-  border-bottom: 2px solid var(--primary-color);
-  /* Add a bottom border for style */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(46, 189, 107, 0.2);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: white;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: transform 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  color: var(--primary-color);
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 20px;
+  gap: 30px;
+  align-items: center;
 }
 
 .nav-links a {
-  color: var(--text-color);
+  color: #eee;
   text-decoration: none;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+  padding-bottom: 5px;
   transition: color 0.3s;
+}
+
+/* Animated Underline Effect */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease-in-out;
 }
 
 .nav-links a:hover {
   color: var(--primary-color);
 }
 
+.nav-links a:hover::after {
+  width: 100%;
+}
+
 .logout-btn {
   color: var(--danger-color) !important;
+  font-weight: bold;
+  border: 1px solid transparent;
+  padding: 5px 15px;
+  border-radius: 20px;
+  transition: all 0.3s !important;
+}
+
+.logout-btn:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+  border-color: var(--danger-color);
+}
+
+.logout-btn:hover::after {
+  width: 0 !important;
+  /* No underline for logout button */
 }

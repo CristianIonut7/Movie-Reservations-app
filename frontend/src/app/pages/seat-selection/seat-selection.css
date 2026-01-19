@@ -1,5 +1,8 @@
 .booking-container {
-    max-width: 600px;
+    width: fit-content;
+    min-width: 600px;
+    max-width: 95vw;
+    padding: 0 20px;
     margin: 40px auto;
     text-align: center;
 }
@@ -27,6 +30,9 @@
     background: #1a1a1a;
     border-radius: 10px;
     border: 1px solid #333;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .seat-row {

@@ -1,10 +1,10 @@
 <div class="home-container">
     <div class="hero-section">
-        <h1>🎬 Găsește filmul perfect</h1>
+        <h1>Gaseste filmul perfect</h1>
 
         <div class="search-bar">
             <input type="text" [(ngModel)]="searchQuery" (keyup.enter)="onSearch()"
-                placeholder="Caută după titlu, regizor...">
+                placeholder="Cauta dupa titlu, regizor...">
 
             <select [(ngModel)]="selectedGenre" (change)="onSearch()">
                 <option value="">Toate genurile</option>
@@ -18,7 +18,7 @@
                 <option value="Biographical drama">Biographical drama</option>
             </select>
 
-            <button (click)="onSearch()">Caută</button>
+            <button (click)="onSearch()">Cauta</button>
         </div>
     </div>
 
@@ -30,12 +30,12 @@
             <div class="movie-details">
                 <h3>{{ m.title }}</h3>
                 <p class="genre">{{ m.genre }} | {{ m.durationMinutes }} min</p>
-                <p class="rating">Vârsta: {{ m.minAge }}+</p>
+                <p class="rating">Varsta: {{ m.minAge }}+</p>
             </div>
         </div>
     </div>
 
     <div *ngIf="movies.length === 0" class="no-results">
-        <p>Nu am găsit filme conform criteriilor selectate.</p>
+        <p>Nu am gasit filme conform criteriilor selectate.</p>
     </div>
 </div>

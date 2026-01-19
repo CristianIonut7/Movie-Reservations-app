@@ -1,5 +1,5 @@
 <div class="booking-container">
-    <h2>Selectează Locurile</h2>
+    <h2>Selecteaza Locurile</h2>
     <div class="screen">ECRAN</div>
 
     <div class="cinema-hall">
@@ -27,7 +27,7 @@
                     <input type="checkbox" [(ngModel)]="usePoints" [disabled]="selectedSeatIds.length > 2">
                     <span class="slider round"></span>
                 </label>
-                <span class="toggle-label">Folosește 100 puncte (max 2 gratis)</span>
+                <span class="toggle-label">Foloseste 100 puncte (max 2 gratis)</span>
             </div>
             <p *ngIf="selectedSeatIds.length > 2 && userPoints >= 100"
                 style="color: var(--danger-color); font-size: 0.9rem;">
@@ -38,6 +38,6 @@
             </p>
         </div>
 
-        <button (click)="confirmBooking()">Confirmă Rezervarea</button>
+        <button (click)="confirmBooking()">Confirma Rezervarea</button>
     </div>
 </div>

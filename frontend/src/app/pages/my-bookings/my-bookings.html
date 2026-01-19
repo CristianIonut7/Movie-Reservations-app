@@ -1,14 +1,14 @@
 <div class="bookings-container">
-  <h2>Rezervările mele</h2>
+  <h2>Rezervarile mele</h2>
   <table>
     <thead>
       <tr>
         <th>Film</th>
         <th>Ora Difuzare</th>
         <th>Locuri</th>
-        <th>Preț</th>
+        <th>Pret</th>
         <th>Status</th>
-        <th>Acțiuni</th>
+        <th>Actiuni</th>
       </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
         <td><strong>{{ b.PaidPrice }} RON</strong></td>
         <td><span class="status-badge">{{ b.Status }}</span></td>
         <td>
-          <button class="btn-cancel" (click)="confirmCancel(b.BookingID)">Anulează</button>
+          <button class="btn-cancel" (click)="confirmCancel(b.BookingID)">Anuleaza</button>
         </td>
       </tr>
     </tbody>

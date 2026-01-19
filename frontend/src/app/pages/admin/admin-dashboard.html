@@ -1,11 +1,11 @@
 <div class="admin-container">
     <div class="header-row">
-        <h1>🛡️ Panou Admin</h1>
+        <h1>Panou Admin</h1>
         <div class="tabs">
-            <button [class.active]="activeTab === 'stats'" (click)="switchTab('stats')">📊 Statistici</button>
-            <button [class.active]="activeTab === 'movies'" (click)="switchTab('movies')">🎬 Gestiune Filme</button>
-            <button [class.active]="activeTab === 'showtimes'" (click)="switchTab('showtimes')">📅 Gestiune
-                Difuzări</button>
+            <button [class.active]="activeTab === 'stats'" (click)="switchTab('stats')">Statistici</button>
+            <button [class.active]="activeTab === 'movies'" (click)="switchTab('movies')">Gestiune Filme</button>
+            <button [class.active]="activeTab === 'showtimes'" (click)="switchTab('showtimes')">Gestiune
+                Difuzari</button>
         </div>
     </div>
 
@@ -13,7 +13,7 @@
     <div *ngIf="activeTab === 'stats'" class="stats-grid">
         <!-- Complex 1 -->
         <div class="stat-card">
-            <h3>🔥 Top 3 Filme (Bilete)</h3>
+            <h3>Top 3 Filme (Bilete)</h3>
             <ul>
                 <li *ngFor="let m of topMovies">
                     {{ m.Title }} - <strong>{{ m.TicketCount }} bilete</strong>
@@ -23,25 +23,25 @@
 
         <!-- Complex 2 -->
         <div class="stat-card">
-            <h3>💎 Clienți VIP</h3>
+            <h3>Clienti VIP</h3>
             <ul>
                 <li *ngFor="let c of vipClients">
                     {{ c.FirstName }} {{ c.LastName }}
                     <br><small>Total: {{ c.TotalSpent }} RON</small>
-                    <button (click)="promoteUser(c.Email)" class="mini-btn">Fă-l Admin</button>
+                    <button (click)="promoteUser(c.Email)" class="mini-btn">Fa-l Admin</button>
                 </li>
             </ul>
         </div>
 
         <!-- Complex 4 & Simple 6 -->
         <div class="stat-card">
-            <h3>📉 Info Diverse</h3>
-            <strong>Fără rezervări:</strong>
+            <h3>Info Diverse</h3>
+            <strong>Fara rezervari:</strong>
             <ul>
                 <li *ngFor="let m of moviesWithoutBookings">{{ m.Title }}</li>
             </ul>
             <hr>
-            <strong>Rezervări pe Genuri:</strong>
+            <strong>Rezervari pe Genuri:</strong>
             <ul>
                 <li *ngFor="let g of genreStats">{{ g.Genre }}: {{ g.BookingsCount }}</li>
             </ul>
@@ -49,7 +49,7 @@
 
         <!-- Simple 4 -->
         <div class="stat-card">
-            <h3>💰 Venituri per Film</h3>
+            <h3>Venituri per Film</h3>
             <ul>
                 <li *ngFor="let r of revenueData">
                     {{ r.Title }} - <strong>{{ r.TotalRevenue }} RON</strong>
@@ -60,7 +60,7 @@
 
     <!-- MOVIES TAB -->
     <div *ngIf="activeTab === 'movies'" class="crud-section">
-        <h3>{{ isEditingMovie ? 'Modifică Film' : 'Adaugă Film Nou' }}</h3>
+        <h3>{{ isEditingMovie ? 'Modifica Film' : 'Adauga Film Nou' }}</h3>
 
         <div class="form-grid">
             <div class="input-group">
@@ -69,18 +69,18 @@
             </div>
             <div class="input-group">
                 <label>Gen</label>
-                <input [(ngModel)]="newMovie.genre" placeholder="Ex: SF, Acțiune" />
+                <input [(ngModel)]="newMovie.genre" placeholder="Ex: SF, Actiune" />
             </div>
             <div class="input-group">
-                <label>Durată (min)</label>
+                <label>Durata (min)</label>
                 <input type="number" [(ngModel)]="newMovie.durationMinutes" />
             </div>
             <div class="input-group">
-                <label>Data Lansării</label>
+                <label>Data Lansarii</label>
                 <input type="date" [(ngModel)]="newMovie.releaseDate" />
             </div>
             <div class="input-group">
-                <label>Vârstă Minimă</label>
+                <label>Varsta Minima</label>
                 <input type="number" [(ngModel)]="newMovie.minAge" />
             </div>
             <div class="input-group">
@@ -93,15 +93,15 @@
             </div>
             <div class="input-group full-width">
                 <label>Descriere</label>
-                <input [(ngModel)]="newMovie.description" placeholder="Scurtă descriere..." />
+                <input [(ngModel)]="newMovie.description" placeholder="Scurta descriere..." />
             </div>
         </div>
 
         <div class="actions-row">
             <button (click)="saveMovie()" [class.update-btn]="isEditingMovie">
-                {{ isEditingMovie ? '💾 Actualizează Film' : '➕ Adaugă Film' }}
+                {{ isEditingMovie ? 'Actualizeaza Film' : 'Adauga Film' }}
             </button>
-            <button *ngIf="isEditingMovie" (click)="cancelEditMovie()" class="cancel-btn">❌ Anulează</button>
+            <button *ngIf="isEditingMovie" (click)="cancelEditMovie()" class="cancel-btn">Anuleaza</button>
         </div>
 
         <table class="crud-table">
@@ -111,7 +111,7 @@
                     <th>Titlu</th>
                     <th>Gen</th>
                     <th>Regizor</th>
-                    <th>Acțiuni</th>
+                    <th>Actiuni</th>
                 </tr>
             </thead>
             <tbody>
@@ -121,8 +121,8 @@
                     <td>{{ m.genre }}</td>
                     <td>{{ m.directorFirstName }} {{ m.directorLastName }}</td>
                     <td>
-                        <button class="edit-btn" (click)="editMovie(m)">✏️ Editează</button>
-                        <button class="delete-btn" (click)="deleteMovie(m.movieID)">🗑️ Șterge</button>
+                        <button class="edit-btn" (click)="editMovie(m)">Editeaza</button>
+                        <button class="delete-btn" (click)="deleteMovie(m.movieID)">Sterge</button>
                     </td>
                 </tr>
             </tbody>
@@ -131,7 +131,7 @@
 
     <!-- SHOWTIMES TAB -->
     <div *ngIf="activeTab === 'showtimes'" class="crud-section">
-        <h3>{{ isEditingShowtime ? 'Modifică Difuzare' : 'Programează Difuzare Nouă' }}</h3>
+        <h3>{{ isEditingShowtime ? 'Modifica Difuzare' : 'Programeaza Difuzare Noua' }}</h3>
 
         <div class="form-grid">
             <div class="input-group">
@@ -149,20 +149,20 @@
                 </select>
             </div>
             <div class="input-group">
-                <label>Data și Ora</label>
+                <label>Data si Ora</label>
                 <input type="datetime-local" [(ngModel)]="newShowtime.startTime" />
             </div>
             <div class="input-group">
-                <label>Preț Bilet (RON)</label>
+                <label>Pret Bilet (RON)</label>
                 <input type="number" [(ngModel)]="newShowtime.ticketPrice" />
             </div>
         </div>
 
         <div class="actions-row">
             <button (click)="saveShowtime()" [class.update-btn]="isEditingShowtime">
-                {{ isEditingShowtime ? '💾 Actualizează Difuzare' : '➕ Salvează Difuzare' }}
+                {{ isEditingShowtime ? 'Actualizeaza Difuzare' : 'Salveaza Difuzare' }}
             </button>
-            <button *ngIf="isEditingShowtime" (click)="cancelEditShowtime()" class="cancel-btn">❌ Anulează</button>
+            <button *ngIf="isEditingShowtime" (click)="cancelEditShowtime()" class="cancel-btn">Anuleaza</button>
         </div>
 
         <table class="crud-table">
@@ -171,8 +171,8 @@
                     <th>Film</th>
                     <th>Sala</th>
                     <th>Ora</th>
-                    <th>Preț</th>
-                    <th>Acțiuni</th>
+                    <th>Pret</th>
+                    <th>Actiuni</th>
                 </tr>
             </thead>
             <tbody>
@@ -182,8 +182,8 @@
                     <td>{{ s.startTime | date:'short' }}</td>
                     <td>{{ s.ticketPrice }} RON</td>
                     <td>
-                        <button class="edit-btn" (click)="editShowtime(s)">✏️ Editează</button>
-                        <button class="delete-btn" (click)="deleteShowtime(s.showtimeID)">🗑️ Șterge</button>
+                        <button class="edit-btn" (click)="editShowtime(s)">Editeaza</button>
+                        <button class="delete-btn" (click)="deleteShowtime(s.showtimeID)">Sterge</button>
                     </td>
                 </tr>
             </tbody>

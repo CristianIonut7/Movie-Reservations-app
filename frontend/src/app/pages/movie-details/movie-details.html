@@ -7,15 +7,15 @@
     <div class="content-wrapper">
         <div class="movie-meta">
             <p><strong>Regizor:</strong> {{ movie.directorFirstName }} {{ movie.directorLastName }}</p>
-            <p><strong>Vârstă Minimă:</strong> {{ movie.minAge }}+</p>
+            <p><strong>Varsta Minima:</strong> {{ movie.minAge }}+</p>
             <p class="description">{{ movie.description }}</p>
         </div>
 
         <div class="showtimes-section">
-            <h2>Program Difuzări</h2>
+            <h2>Program Difuzari</h2>
 
             <div *ngIf="showtimes.length === 0" class="no-showtimes">
-                <p>Nu există difuzări programate pentru acest film.</p>
+                <p>Nu exista difuzari programate pentru acest film.</p>
             </div>
 
             <div class="showtimes-list">
@@ -29,7 +29,7 @@
                         <span class="price">{{ s.ticketPrice }} RON</span>
                     </div>
                     <button class="btn-book" [routerLink]="['/booking', s.showtimeID]">
-                        Rezervă
+                        Rezerva
                     </button>
                 </div>
             </div>
