@@ -21,7 +21,6 @@ export class SeatSelection implements OnInit {
   selectedSeatIds: number[] = [];
   userId!: number;
 
-  // Loyalty
   userPoints: number = 0;
   usePoints: boolean = false;
 
@@ -48,7 +47,6 @@ export class SeatSelection implements OnInit {
       const userData = JSON.parse(savedUser);
       this.userId = userData.userID;
 
-      // Fetch fresh user data (points)
       this.http.get<any>(`http://localhost:8080/api/auth/user/${this.userId}`).subscribe({
         next: (u) => {
           this.userPoints = u.loyaltyPoints || 0;
@@ -97,7 +95,6 @@ export class SeatSelection implements OnInit {
           this.router.navigate(['/home']);
         },
         error: (err) => {
-          // Extragem mesajul de eroare din backend (ex: varsta)
           const msg = err.error || "Eroare la rezervare!";
           alert(msg);
         }

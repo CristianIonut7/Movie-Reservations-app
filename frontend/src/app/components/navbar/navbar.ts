@@ -10,7 +10,6 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './navbar.css'
 })
 export class Navbar implements OnInit {
-  // 1. Injectăm Router-ul aici ca să dispară eroarea
   router = inject(Router);
 
   isLoggedIn: boolean = false;
@@ -21,7 +20,7 @@ export class Navbar implements OnInit {
     this.checkLoginStatus();
   }
 
-  
+
 
   checkLoginStatus() {
     const user = localStorage.getItem('currentUser');
@@ -37,12 +36,10 @@ export class Navbar implements OnInit {
   }
 
   logout() {
-    // Ștergem datele din memoria browserului
-    localStorage.removeItem('currentUser'); 
+    localStorage.removeItem('currentUser');
     this.isLoggedIn = false;
     this.userRole = 'guest';
-    
-    // Acum this.router va funcționa!
+
     this.router.navigate(['/login']);
   }
 }

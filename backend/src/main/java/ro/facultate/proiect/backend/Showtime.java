@@ -10,11 +10,9 @@ public class Showtime {
     private Timestamp startTime;
     private BigDecimal ticketPrice;
     
-    // Extra fields for display (joins)
     private String movieTitle;
     private String roomType;
 
-    // Getters and Setters
     public int getShowtimeID() { return showtimeID; }
     public void setShowtimeID(int showtimeID) { this.showtimeID = showtimeID; }
 

@@ -18,14 +18,12 @@ export class MyBookingsComponent implements OnInit {
   userId!: number;
 
   ngOnInit() {
-    // Recuperăm user-ul din localStorage așa cum am stabilit anterior
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
       const userData = JSON.parse(savedUser);
-      this.userId = userData.userID; // Folosim userID cu ID mare conform log-ului tău
+      this.userId = userData.userID;
       this.loadMyBookings();
     } else {
-      // Dacă nu e logat, îl trimitem la login
       this.router.navigate(['/login']);
     }
   }
@@ -43,12 +41,11 @@ export class MyBookingsComponent implements OnInit {
 
   confirmCancel(bookingId: number) {
     if (confirm("Ești sigur că vrei să anulezi această rezervare? Această acțiune va elibera locurile în sală.")) {
-      // Implementăm operația DELETE cerută în proiect [cite: 35]
       this.http.delete(`http://localhost:8080/api/bookings/${bookingId}`, { responseType: 'text' })
         .subscribe({
           next: (res) => {
             alert(res);
-            this.loadMyBookings(); // Reîmprospătăm lista după ștergere
+            this.loadMyBookings();
           },
           error: (err) => alert("Eroare la anularea rezervării!")
         });

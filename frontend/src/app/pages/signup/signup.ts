@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule],
   templateUrl: './signup.html',
-  styleUrl: '../login/login.css' // Refolosim stilul de la login
+  styleUrl: '../login/login.css'
 })
 export class Signup {
   http = inject(HttpClient);
@@ -18,7 +18,7 @@ export class Signup {
     firstName: '',
     lastName: '',
     email: '',
-    passwordHash: '', // Va fi hash-uită de backend
+    passwordHash: '',
     age: null,
     city: '',
     phoneNumber: ''

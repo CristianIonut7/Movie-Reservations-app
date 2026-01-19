@@ -41,7 +41,6 @@ h1 {
     font-weight: bold;
 }
 
-/* STATS */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -84,7 +83,6 @@ h1 {
     cursor: pointer;
 }
 
-/* CRUD & FORMS */
 .crud-section {
     background: var(--bg-card);
     padding: 25px;
@@ -161,7 +159,6 @@ button:hover {
     background: #6c757d;
 }
 
-/* TABLE */
 .crud-table {
     width: 100%;
     border-collapse: collapse;
@@ -196,10 +193,8 @@ button:hover {
 
 .delete-btn:hover {
     background: #c82333;
-    /* Darker Red */
 }
 
 .cancel-btn:hover {
     background: #5a6268;
-    /* Darker Grey */
 }

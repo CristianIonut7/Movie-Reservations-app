@@ -20,7 +20,6 @@ public class AuthController {
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    // DTO pentru Login
     public static class LoginRequest {
         private String email;
         private String password;
@@ -34,7 +33,6 @@ public class AuthController {
         }
     }
 
-    // În AuthController.java
     @PostMapping("/login")
     public ResponseEntity<?> handleLogin(@RequestBody LoginRequest loginData) {
         Optional<User> userOptional = userRepository.findByEmail(loginData.getEmail());
@@ -42,8 +40,6 @@ public class AuthController {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             if (passwordEncoder.matches(loginData.getPassword(), user.getPasswordHash())) {
-                // În loc de un Map manual, trimitem tot obiectul user (fără parolă din motive
-                // de securitate)
                 user.setPasswordHash(null);
                 return ResponseEntity.ok(user);
             }
@@ -71,19 +67,17 @@ public class AuthController {
         }
     }
 
-    // Endpoint helper pentru a lua datele user-ului (inclusiv puncte) după ID
     @org.springframework.web.bind.annotation.GetMapping("/user/{id}")
     public ResponseEntity<?> getUserById(@org.springframework.web.bind.annotation.PathVariable int id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             User u = user.get();
-            u.setPasswordHash(null); // Ascundem parola
+            u.setPasswordHash(null);
             return ResponseEntity.ok(u);
         }
         return ResponseEntity.status(404).body("User not found");
     }
 
-    // DTO pentru schimbarea parolei
     public static class ChangePasswordRequest {
         public int userId;
         public String oldPassword;
@@ -100,15 +94,12 @@ public class AuthController {
 
         User user = userOpt.get();
 
-        // 1. Verificăm parola veche
         if (!passwordEncoder.matches(req.oldPassword, user.getPasswordHash())) {
             return ResponseEntity.status(400).body("Parola veche este incorectă.");
         }
 
-        // 2. Hash noua parolă
         String newHash = passwordEncoder.encode(req.newPassword);
 
-        // 3. Update în DB
         boolean success = userRepository.updatePassword(req.userId, newHash);
         
         if (success) {

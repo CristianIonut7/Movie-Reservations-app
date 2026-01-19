@@ -12,9 +12,6 @@ public class MovieRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    // --- CRUD OPERATION ---
-
-    // CREATE (Insert)
     public void addMovie(Movie movie) {
         String sql = "INSERT INTO Movies (Title, Description, Genre, DurationMinutes, ReleaseDate, MinAge, DirectorFirstName, DirectorLastName) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -22,19 +19,16 @@ public class MovieRepository {
                             movie.getReleaseDate(), movie.getMinAge(), movie.getDirectorFirstName(), movie.getDirectorLastName());
     }
 
-    // READ (Select All)
     public List<Movie> getAllMovies() {
         String sql = "SELECT * FROM Movies";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Movie.class));
     }
 
-    // READ (Select One)
     public Movie getMovieById(int id) {
         String sql = "SELECT * FROM Movies WHERE MovieID = ?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Movie.class), id);
     }
 
-    // UPDATE
     public void updateMovie(Movie movie) {
         String sql = "UPDATE Movies SET Title=?, Description=?, Genre=?, DurationMinutes=?, ReleaseDate=?, MinAge=?, " +
                      "DirectorFirstName=?, DirectorLastName=? WHERE MovieID=?";
@@ -42,7 +36,6 @@ public class MovieRepository {
                             movie.getReleaseDate(), movie.getMinAge(), movie.getDirectorFirstName(), movie.getDirectorLastName(), movie.getMovieID());
     }
 
-    // DELETE
     public void deleteMovie(int id) {
         String sql = "DELETE FROM Movies WHERE MovieID = ?";
         jdbcTemplate.update(sql, id);
@@ -64,7 +57,6 @@ public class MovieRepository {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ShowtimeDTO.class));
     }
 
-    // --- SEARCH & FILTER ---
     public List<Movie> searchMovies(String query, String genre) {
         StringBuilder sql = new StringBuilder("SELECT * FROM Movies WHERE 1=1");
         java.util.List<Object> params = new java.util.ArrayList<>();

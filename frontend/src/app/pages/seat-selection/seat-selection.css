@@ -57,9 +57,7 @@
     height: 35px;
     background-color: #444;
     border-radius: 8px 8px 4px 4px;
-    /* Chair shape */
     border-top: 2px solid #666;
-    /* 3D effect highlight */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,7 +66,6 @@
     font-size: 0.8rem;
     font-weight: bold;
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    /* Bouncy transition */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     position: relative;
     user-select: none;
@@ -137,7 +134,6 @@ button {
     cursor: pointer;
 }
 
-/* Toggle Switch Styling */
 .loyalty-section {
     background: #222;
     padding: 15px;

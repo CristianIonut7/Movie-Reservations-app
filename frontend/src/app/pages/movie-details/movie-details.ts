@@ -7,7 +7,7 @@ import { Navbar } from '../../components/navbar/navbar';
 @Component({
   selector: 'app-movie-details',
   standalone: true,
-  imports: [CommonModule, RouterModule, Navbar],
+  imports: [CommonModule, RouterModule],
   templateUrl: './movie-details.html',
   styleUrls: ['./movie-details.css']
 })

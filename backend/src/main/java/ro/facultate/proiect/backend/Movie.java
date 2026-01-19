@@ -13,7 +13,6 @@ public class Movie {
     private String directorFirstName;
     private String directorLastName;
 
-    // Getters and Setters
     public int getMovieID() { return movieID; }
     public void setMovieID(int movieID) { this.movieID = movieID; }
 

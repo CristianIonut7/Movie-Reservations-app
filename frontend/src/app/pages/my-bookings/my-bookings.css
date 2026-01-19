@@ -36,7 +36,6 @@ td {
     color: var(--text-color);
 }
 
-/* ... status badge ... */
 .status-badge {
     background: var(--primary-color);
     color: white;

@@ -12,7 +12,6 @@ public class ShowtimeRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    // CREATE
     public void addShowtime(Showtime showtime) {
         String sql = "INSERT INTO Showtimes (MovieID, RoomID, StartTime, TicketPrice) VALUES (?, ?, ?, ?)";
         jdbcTemplate.update(sql, showtime.getMovieID(), showtime.getRoomID(), showtime.getStartTime(), showtime.getTicketPrice());
@@ -31,19 +30,16 @@ public class ShowtimeRepository {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Showtime.class));
     }
 
-    // READ ONE
     public Showtime getShowtimeById(int id) {
         String sql = "SELECT * FROM Showtimes WHERE ShowtimeID = ?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Showtime.class), id);
     }
 
-    // UPDATE
     public void updateShowtime(Showtime s) {
         String sql = "UPDATE Showtimes SET MovieID=?, RoomID=?, StartTime=?, TicketPrice=? WHERE ShowtimeID=?";
         jdbcTemplate.update(sql, s.getMovieID(), s.getRoomID(), s.getStartTime(), s.getTicketPrice(), s.getShowtimeID());
     }
 
-    // DELETE
     public void deleteShowtime(int id) {
         String sql = "DELETE FROM Showtimes WHERE ShowtimeID = ?";
         jdbcTemplate.update(sql, id);

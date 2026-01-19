@@ -5,7 +5,6 @@
   background: var(--bg-card);
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  /* Shadow more visible on dark */
   font-family: var(--font-family);
   border: 1px solid #333;
 }

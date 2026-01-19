@@ -5,11 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor // OBLIGATORIU pentru RowMapper
+@NoArgsConstructor
 @AllArgsConstructor
 public class SeatDTO {
     private int seatId;
     private int rowNumber;
     private int seatNumber;
-    private boolean occupied; // true dacă locul e deja rezervat pentru acest showtime
+    private boolean occupied;
 }

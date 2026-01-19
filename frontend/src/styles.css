@@ -1,5 +1,4 @@
 :root {
-    /* Emerald Green Theme */
     --primary-color: #2EBD6B;
     --primary-hover: #25a25a;
     --bg-dark: #121212;
@@ -19,7 +18,6 @@ body {
     padding: 0;
 }
 
-/* Utilitare */
 .btn-primary {
     background-color: var(--primary-color) !important;
     color: white !important;

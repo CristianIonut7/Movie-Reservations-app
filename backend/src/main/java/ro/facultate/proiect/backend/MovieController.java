@@ -11,8 +11,6 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
 
-    // --- CRUD Endpoints ---
-
     @GetMapping
     public List<Movie> getAllMovies() {
         return movieRepository.getAllMovies();
@@ -42,13 +40,11 @@ public class MovieController {
         return "Movie deleted successfully";
     }
 
-    // --- Existing SHOWTIME Endpoint (Combined) ---
     @GetMapping("/showtimes")
     public List<ShowtimeDTO> getShowtimes() {
         return movieRepository.getAllShowtimes();
     }
 
-    // --- Search Endpoint ---
     @GetMapping("/search")
     public List<Movie> searchMovies(@RequestParam(required = false) String query, @RequestParam(required = false) String genre) {
         return movieRepository.searchMovies(query, genre);

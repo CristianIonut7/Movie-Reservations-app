@@ -13,10 +13,8 @@ import { FormsModule } from '@angular/forms';
 export class AdminDashboard implements OnInit {
   private http = inject(HttpClient);
 
-  // Tabs
   activeTab: string = 'stats';
 
-  // Stats Data
   topMovies: any[] = [];
   vipClients: any[] = [];
   moviesWithoutBookings: any[] = [];
@@ -24,15 +22,12 @@ export class AdminDashboard implements OnInit {
   genreStats: any[] = [];
   statsLoaded = false;
 
-  // CRUD Data
   movies: any[] = [];
   showtimes: any[] = [];
 
-  // Forms & State
   isEditingMovie = false;
   isEditingShowtime = false;
 
-  // Model matches Backend DTO (lowerCamelCase)
   newMovie: any = {
     movieID: 0,
     title: '',

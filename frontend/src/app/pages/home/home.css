@@ -14,7 +14,6 @@
     font-size: 2.5rem;
     margin-bottom: 2rem;
     color: var(--primary-color);
-    /* Changed from warning to primary for theme consistency */
 }
 
 .movie-grid {
@@ -65,10 +64,6 @@
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
 }
-
-/* ... existing styles ... */
-
-/* ... existing styles ... */
 
 .search-bar {
     display: flex;

@@ -15,7 +15,6 @@ export class Profile implements OnInit {
   http = inject(HttpClient);
   router = inject(Router);
 
-  // Modelul de date pentru utilizator
   user: any = {
     userID: 0,
     firstName: '',
@@ -27,20 +26,17 @@ export class Profile implements OnInit {
     loyaltyPoints: 0
   };
 
-  // Date pentru schimbarea parolei
   passwordData = {
     oldPassword: '',
     newPassword: ''
   };
 
   ngOnInit() {
-    // Încărcăm datele salvate la login
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
       const basicUser = JSON.parse(savedUser);
       this.user = { ...this.user, ...basicUser };
 
-      // Facem un refresh de la backend
       if (this.user.userID) {
         this.http.get<any>(`http://localhost:8080/api/auth/user/${this.user.userID}`).subscribe({
           next: (fullUser) => {
@@ -94,7 +90,6 @@ export class Profile implements OnInit {
           next: (res) => {
             alert(res);
             localStorage.removeItem('currentUser');
-            // Folosim window.location.href pentru a reseta complet starea aplicației
             window.location.href = '/login';
           },
           error: (err) => alert("Eroare la ștergerea contului: " + err.error)
