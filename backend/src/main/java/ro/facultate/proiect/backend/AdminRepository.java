@@ -12,20 +12,20 @@ public class AdminRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    // 1. [Complex 1] Subcerere în clauza FROM: Top 3 filme după numărul de bilete vândute
+    // Complex 1: Subcerere in clauza FROM. Top 3 filme dupa numarul de bilete vandute.
     public List<Map<String, Object>> getTopMovies() {
         String sql = "SELECT TOP 3 Title, TicketCount FROM (" +
                      "  SELECT m.Title, COUNT(bs.BookingID) as TicketCount " +
                      "  FROM Movies m " +
                      "  JOIN Showtimes s ON m.MovieID = s.MovieID " +
                      "  JOIN Bookings b ON s.ShowtimeID = b.ShowtimeID " +
-                     "  JOIN BookedSeats bs ON b.BookingID = bs.BookingID " + // Correct path: Movies->Showtimes->Bookings->BookedSeats
+                     "  JOIN BookedSeats bs ON b.BookingID = bs.BookingID " + 
                      "  GROUP BY m.Title" +
                      ") AS MovieStats ORDER BY TicketCount DESC";
         return jdbcTemplate.queryForList(sql);
     }
 
-    // 2. [Complex 2] Subcerere în clauza WHERE: Clienți VIP (exclude admini, cheltuieli reale)
+    // Complex 2: Subcerere in clauza WHERE, HAVING si SELECT. Clienti VIP (exclude admini) ordonati descrescator dupa cheltuieli.
     public List<Map<String, Object>> getVipClients() {
         String sql = "SELECT FirstName, LastName, Email, " +
                      "(SELECT SUM(b2.PaidPrice) FROM Bookings b2 WHERE b2.UserID = u.UserID) as TotalSpent " +
@@ -38,7 +38,7 @@ public class AdminRepository {
         return jdbcTemplate.queryForList(sql);
     }
 
-    // 3. [Complex 3] Filme care nu au avut nicio rezervare (NOT EXISTS)
+    // Complex 3: Subcerere cu NOT EXISTS in clauza WHERE. Filme care nu au avut nicio rezervare.
     public List<Map<String, Object>> getMoviesWithoutBookings() {
         String sql = "SELECT m.Title, m.Genre, m.ReleaseDate FROM Movies m " +
                      "WHERE NOT EXISTS (" +
@@ -49,7 +49,7 @@ public class AdminRepository {
         return jdbcTemplate.queryForList(sql);
     }
 
-    // 4. [Simple 1] Venituri generate per Film (suma PaidPrice)
+    // Simple 1: Interogare cu JOIN intre 3 tabele. Venituri totale generate per film.
     public List<Map<String, Object>> getRevenuePerMovie() {
         String sql = "SELECT m.Title, SUM(b.PaidPrice) as TotalRevenue " +
                      "FROM Movies m " +
@@ -61,7 +61,7 @@ public class AdminRepository {
         return jdbcTemplate.queryForList(sql);
     }
 
-    // 5. [Simple 2] Statistici Rezervări pe Genuri (JOIN Genre-Movie-Showtime-Booking)
+    // Simple 2: Interogare cu JOIN intre 3 tabele. Numarul de rezervari grupate pe genuri.
     public List<Map<String, Object>> getGenreStats() {
         String sql = "SELECT m.Genre, COUNT(b.BookingID) as BookingsCount " +
                      "FROM Movies m " +
@@ -71,7 +71,6 @@ public class AdminRepository {
         return jdbcTemplate.queryForList(sql);
     }
 
-    // 3. Operație de Management: Promovare Admin (UPDATE)
     public int promoteToAdmin(String email) {
         return jdbcTemplate.update("UPDATE Users SET UserRole = 'admin' WHERE Email = ?", email);
     }

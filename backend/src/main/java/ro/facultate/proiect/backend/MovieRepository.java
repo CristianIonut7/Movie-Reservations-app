@@ -48,8 +48,7 @@ public class MovieRepository {
         jdbcTemplate.update(sql, id);
     }
     
-    // --- EXISTING ---
-
+    // Simple 5: Interogare cu JOIN intre 3 tabele. Lista difuzarilor pentru afisarea pe prima pagina.
     public List<ShowtimeDTO> getAllShowtimes() {
         String sql = "SELECT s.ShowtimeID AS showtimeId, " +
                 "m.Title AS movieTitle, " + 

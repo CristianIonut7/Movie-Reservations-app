@@ -19,7 +19,7 @@ public class BookingRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    // 1. Vezi locurile libere/ocupate pentru o difuzare (JOIN + Subquery)
+    // Complex 4: Subcerere in clauza SELECT (CASE WHEN EXISTS). Verifica starea locurilor pentru o difuzare.
     public List<SeatDTO> getSeatsStatus(int showtimeId) {
         String sql = "SELECT s.SeatID AS seatId, s.RowNumber AS rowNumber, s.SeatNumber AS seatNumber, " +
                 "CASE WHEN EXISTS ( " +
@@ -33,7 +33,7 @@ public class BookingRepository {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(SeatDTO.class), showtimeId, showtimeId);
     }
 
-    // 2. Salvare Rezervare (INSERT pe 2 tabele - Relație N:N) + Business Logic
+    // Simple 6: Interogare cu JOIN intre 2 tabele in interiorul metodei (createBooking nu este o interogare simpla, dar contine una).
     @Transactional
     public void createBooking(int userId, int showtimeId, List<Integer> seatIds, boolean usePoints) {
         // A. Obținem datele despre Utilizator (Vârstă, Puncte)
@@ -108,6 +108,7 @@ public class BookingRepository {
         }
     }
 
+    // Complex 5: Subcerere in clauza SELECT (STRING_AGG). Lista rezervarilor unui utilizator cu locurile concatenate.
     public List<Map<String, Object>> getUserBookings(int userId) {
         // Interogare complexă (JOIN) conform cerinței 4
         // Nu afișăm ID-uri, ci informații relevante: Titlu, Dată, Status
@@ -123,6 +124,7 @@ public class BookingRepository {
 
         return jdbcTemplate.queryForList(sql, userId);
     }
+
 
     @Transactional
     public void cancelBooking(int bookingId) {

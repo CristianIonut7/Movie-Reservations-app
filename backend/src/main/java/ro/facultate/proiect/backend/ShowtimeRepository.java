@@ -18,7 +18,7 @@ public class ShowtimeRepository {
         jdbcTemplate.update(sql, showtime.getMovieID(), showtime.getRoomID(), showtime.getStartTime(), showtime.getTicketPrice());
     }
 
-    // READ ALL (with JOINs for display)
+    // Simple 3: Interogare cu LEFT JOIN intre 3 tabele. Lista tuturor difuzarilor cu detalii despre film si sala.
     public List<Showtime> getAllShowtimes() {
         String sql = "SELECT s.ShowtimeID as showtimeID, s.MovieID as movieID, s.RoomID as roomID, " +
                      "s.StartTime as startTime, s.TicketPrice as ticketPrice, " +
@@ -49,6 +49,7 @@ public class ShowtimeRepository {
         jdbcTemplate.update(sql, id);
     }
 
+    // Simple 4: Interogare cu LEFT JOIN si clauza WHERE. Lista difuzarilor pentru un anumit film.
     public List<Showtime> getShowtimesByMovieId(int movieId) {
         String sql = "SELECT s.ShowtimeID as showtimeID, s.MovieID as movieID, s.RoomID as roomID, " +
                 "s.StartTime as startTime, s.TicketPrice as ticketPrice, " +
