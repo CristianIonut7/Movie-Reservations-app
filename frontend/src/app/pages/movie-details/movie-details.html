@@ -1,0 +1,38 @@
+<div class="details-container" *ngIf="movie">
+    <div class="movie-header">
+        <h1>{{ movie.title }}</h1>
+        <p class="genre">{{ movie.genre }} | {{ movie.durationMinutes }} min | {{ movie.releaseDate | date:'yyyy' }}</p>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="movie-meta">
+            <p><strong>Regizor:</strong> {{ movie.directorFirstName }} {{ movie.directorLastName }}</p>
+            <p><strong>Vârstă Minimă:</strong> {{ movie.minAge }}+</p>
+            <p class="description">{{ movie.description }}</p>
+        </div>
+
+        <div class="showtimes-section">
+            <h2>Program Difuzări</h2>
+
+            <div *ngIf="showtimes.length === 0" class="no-showtimes">
+                <p>Nu există difuzări programate pentru acest film.</p>
+            </div>
+
+            <div class="showtimes-list">
+                <div *ngFor="let s of showtimes" class="showtime-card">
+                    <div class="time-info">
+                        <span class="date">{{ s.startTime | date:'dd MMM' }}</span>
+                        <span class="time">{{ s.startTime | date:'HH:mm' }}</span>
+                    </div>
+                    <div class="room-info">
+                        <span class="room-type">Sala {{ s.roomType }}</span>
+                        <span class="price">{{ s.ticketPrice }} RON</span>
+                    </div>
+                    <button class="btn-book" [routerLink]="['/booking', s.showtimeID]">
+                        Rezervă
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

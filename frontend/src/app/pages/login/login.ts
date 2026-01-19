@@ -30,10 +30,10 @@ export class Login {
           localStorage.setItem('currentUser', JSON.stringify(response));
 
           alert('Bine ai venit, ' + response.firstName);
-          this.router.navigate(['/home']);
 
-          // Forțăm un refresh mic sau anunțăm navbar-ul (vezi pasul 3)
-          window.location.reload();
+          // Folosim window.location.href pentru a forța navigarea ȘI reîncărcarea
+          // Astfel Navbar-ul își va face update la starea de login
+          window.location.href = '/home';
         },
         error: (error) => alert('Login eșuat!')
       });

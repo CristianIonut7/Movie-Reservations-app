@@ -6,6 +6,7 @@
         <th>Film</th>
         <th>Ora Difuzare</th>
         <th>Locuri</th>
+        <th>Preț</th>
         <th>Status</th>
         <th>Acțiuni</th>
       </tr>
@@ -15,6 +16,7 @@
         <td>{{ b.Title }}</td>
         <td>{{ b.StartTime | date:'dd/MM/yyyy HH:mm' }}</td>
         <td>{{ b.Seats }}</td>
+        <td><strong>{{ b.PaidPrice }} RON</strong></td>
         <td><span class="status-badge">{{ b.Status }}</span></td>
         <td>
           <button class="btn-cancel" (click)="confirmCancel(b.BookingID)">Anulează</button>

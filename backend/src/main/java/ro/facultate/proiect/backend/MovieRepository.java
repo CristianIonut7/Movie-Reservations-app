@@ -64,4 +64,26 @@ public class MovieRepository {
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ShowtimeDTO.class));
     }
+
+    // --- SEARCH & FILTER ---
+    public List<Movie> searchMovies(String query, String genre) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM Movies WHERE 1=1");
+        java.util.List<Object> params = new java.util.ArrayList<>();
+
+        if (query != null && !query.trim().isEmpty()) {
+            sql.append(" AND (Title LIKE ? OR DirectorFirstName LIKE ? OR DirectorLastName LIKE ? OR Description LIKE ?)");
+            String likeQuery = "%" + query.trim() + "%";
+            params.add(likeQuery);
+            params.add(likeQuery);
+            params.add(likeQuery);
+            params.add(likeQuery);
+        }
+
+        if (genre != null && !genre.trim().isEmpty()) {
+            sql.append(" AND Genre = ?");
+            params.add(genre.trim());
+        }
+
+        return jdbcTemplate.query(sql.toString(), new BeanPropertyRowMapper<>(Movie.class), params.toArray());
+    }
 }

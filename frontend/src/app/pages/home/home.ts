@@ -2,28 +2,37 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieService } from '../../services/movie.service';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Navbar } from '../../components/navbar/navbar';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule, Navbar],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class Home implements OnInit {
   movieService = inject(MovieService);
-  showtimes: any[] = [];
+  movies: any[] = [];
+
+  searchQuery: string = '';
+  selectedGenre: string = '';
 
   ngOnInit(): void {
-    this.movieService.getShowtimes().subscribe({
+    this.loadMovies();
+  }
+
+  loadMovies() {
+    this.movieService.searchMovies(this.searchQuery, this.selectedGenre).subscribe({
       next: (data) => {
-        console.log('DATE PRIMITE DE LA SERVER:', data); // VEZI ASTA ÎN CONSOLĂ (F12)
-        this.showtimes = data;
-        console.log('Program încărcat cu succes!');
+        this.movies = data;
       },
-      error: (err) => {
-        console.error('Eroare la preluarea programului:', err);
-      }
+      error: (err) => console.error('Eroare la search:', err)
     });
+  }
+
+  onSearch() {
+    this.loadMovies();
   }
 }

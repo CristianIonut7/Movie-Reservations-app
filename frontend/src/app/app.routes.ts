@@ -9,10 +9,11 @@ import { MyBookingsComponent } from './pages/my-bookings/my-bookings';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  
+
   { path: 'login', component: Login },
   { path: 'signup', component: Signup },
   { path: 'home', component: Home },
+  { path: 'movie/:id', loadComponent: () => import('./pages/movie-details/movie-details').then(m => m.MovieDetails) },
   { path: 'profile', component: Profile },
   { path: 'booking/:id', component: SeatSelection },
   { path: 'admin', component: AdminDashboard },

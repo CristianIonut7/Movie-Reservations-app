@@ -13,4 +13,16 @@ export class MovieService {
   getShowtimes(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/showtimes`);
   }
+
+  searchMovies(query: string, genre: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/search?query=${query}&genre=${genre}`);
+  }
+
+  getMovieById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  getShowtimesByMovie(movieId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8080/api/showtimes/movie/${movieId}`);
+  }
 }

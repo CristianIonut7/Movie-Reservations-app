@@ -25,8 +25,9 @@ public class BookingController {
             int userId = (int) payload.get("userId");
             int showtimeId = (int) payload.get("showtimeId");
             List<Integer> seatIds = (List<Integer>) payload.get("seatIds");
+            boolean usePoints = payload.containsKey("usePoints") ? (boolean) payload.get("usePoints") : false;
 
-            bookingRepository.createBooking(userId, showtimeId, seatIds);
+            bookingRepository.createBooking(userId, showtimeId, seatIds, usePoints);
             return ResponseEntity.ok("Rezervare finalizată cu succes!");
         } catch (Exception e) {
             return ResponseEntity.status(400).body("Eroare la rezervare: " + e.getMessage());

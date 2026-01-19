@@ -6,6 +6,7 @@ ro\facultate\proiect\backend\SeatDTO.class
 ro\facultate\proiect\backend\AdminDashboardController.class
 ro\facultate\proiect\backend\AuthController.class
 ro\facultate\proiect\backend\SecurityConfig.class
+ro\facultate\proiect\backend\AuthController$ChangePasswordRequest.class
 ro\facultate\proiect\backend\ShowtimeController.class
 ro\facultate\proiect\backend\UserRepository.class
 ro\facultate\proiect\backend\BookingRepository.class

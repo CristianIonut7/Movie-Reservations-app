@@ -1,23 +1,41 @@
 <div class="home-container">
-    <h1>🎬 Program Cinema</h1>
+    <div class="hero-section">
+        <h1>🎬 Găsește filmul perfect</h1>
 
-    <div class="movie-grid">
-        <div *ngFor="let s of showtimes" class="movie-card">
-            <h3>{{ s.movieTitle }}</h3>
+        <div class="search-bar">
+            <input type="text" [(ngModel)]="searchQuery" (keyup.enter)="onSearch()"
+                placeholder="Caută după titlu, regizor...">
 
-            <div class="movie-info">
-                <p><strong>Gen:</strong> {{ s.genre }}</p>
-                <p><strong>Sala:</strong> {{ s.roomType }}</p>
-                <p><strong>Data/Ora:</strong> {{ s.startTime | date:'dd MMM, HH:mm' }}</p>
-                <p class="price"><strong>Preț:</strong> {{ s.ticketPrice }} RON</p>
-            </div>
-            <button class="btn-reserve" [routerLink]="['/booking', s.showtimeId]">
-                Rezervă Bilete
-            </button>
+            <select [(ngModel)]="selectedGenre" (change)="onSearch()">
+                <option value="">Toate genurile</option>
+                <option value="Action">Action</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Drama">Drama</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Horror">Horror</option>
+                <option value="Animation">Animation</option>
+                <option value="Crime">Crime</option>
+                <option value="Biographical drama">Biographical drama</option>
+            </select>
+
+            <button (click)="onSearch()">Caută</button>
         </div>
     </div>
 
-    <div *ngIf="showtimes.length === 0" style="text-align: center; margin-top: 50px;">
-        <p>Momentan nu există difuzări programate.</p>
+    <div class="movie-grid">
+        <div *ngFor="let m of movies" class="movie-card" [routerLink]="['/movie', m.movieID]">
+            <div class="movie-poster-placeholder">
+                <span>{{ m.title[0] }}</span>
+            </div>
+            <div class="movie-details">
+                <h3>{{ m.title }}</h3>
+                <p class="genre">{{ m.genre }} | {{ m.durationMinutes }} min</p>
+                <p class="rating">Vârsta: {{ m.minAge }}+</p>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="movies.length === 0" class="no-results">
+        <p>Nu am găsit filme conform criteriilor selectate.</p>
     </div>
 </div>

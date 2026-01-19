@@ -1,15 +1,15 @@
 <nav class="navbar-container">
   <div class="logo" routerLink="/home">CinemaBD</div>
-  
+
   <ul class="nav-links">
     <li><a routerLink="/home">Program Filme</a></li>
 
     <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
     <li *ngIf="!isLoggedIn"><a routerLink="/signup">Signup</a></li>
 
-    <li *ngIf="isLoggedIn && userRole === 'client'"><a routerLink="/my-bookings">Rezervările mele</a></li>
-    <li *ngIf="isLoggedIn && userRole === 'client'"><a routerLink="/profile">Profilul Meu</a></li>
-    
+    <li *ngIf="isLoggedIn"><a routerLink="/my-bookings">Rezervările mele</a></li>
+    <li *ngIf="isLoggedIn"><a routerLink="/profile">Profilul Meu</a></li>
+
     <li *ngIf="isLoggedIn && userRole === 'admin'"><a routerLink="/admin">Panou Admin</a></li>
 
     <li *ngIf="isLoggedIn" (click)="logout()"><a class="logout-btn">Logout</a></li>

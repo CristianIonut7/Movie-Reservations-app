@@ -2,11 +2,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-seat-selection',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './seat-selection.html',
   styleUrl: './seat-selection.css'
 })
@@ -20,6 +21,10 @@ export class SeatSelection implements OnInit {
   selectedSeatIds: number[] = [];
   userId!: number;
 
+  // Loyalty
+  userPoints: number = 0;
+  usePoints: boolean = false;
+
   getRowLabel(rowNum: number): string {
     return String.fromCharCode(64 + rowNum);
   }
@@ -32,7 +37,6 @@ export class SeatSelection implements OnInit {
       }
       rowsMap.get(seat.rowNumber)?.push(seat);
     });
-    // Returnăm rândurile sortate
     return Array.from(rowsMap.values()).sort((a, b) => a[0].rowNumber - b[0].rowNumber);
   }
 
@@ -42,12 +46,15 @@ export class SeatSelection implements OnInit {
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
       const userData = JSON.parse(savedUser);
-
-      // MODIFICAREA ESTE AICI:
-      // Folosim .userID (cu ID mare) exact cum apare în consola ta
       this.userId = userData.userID;
 
-      console.log("ID-ul utilizatorului a fost setat cu succes:", this.userId);
+      // Fetch fresh user data (points)
+      this.http.get<any>(`http://localhost:8080/api/auth/user/${this.userId}`).subscribe({
+        next: (u) => {
+          this.userPoints = u.loyaltyPoints || 0;
+        },
+        error: (e) => console.error("Could not fetch user details", e)
+      });
     }
 
     this.loadSeats();
@@ -59,13 +66,13 @@ export class SeatSelection implements OnInit {
   }
 
   toggleSeat(seat: any) {
-    if (seat.occupied) return; // Nu poți selecta locuri ocupate
+    if (seat.occupied) return;
 
     const index = this.selectedSeatIds.indexOf(seat.seatId);
     if (index > -1) {
-      this.selectedSeatIds.splice(index, 1); // Deselectează
+      this.selectedSeatIds.splice(index, 1);
     } else {
-      this.selectedSeatIds.push(seat.seatId); // Selectează
+      this.selectedSeatIds.push(seat.seatId);
     }
   }
 
@@ -75,12 +82,13 @@ export class SeatSelection implements OnInit {
 
   confirmBooking() {
     const payload = {
-      userId: this.userId, // Aici va fi valoarea 2
+      userId: this.userId,
       showtimeId: this.showtimeId,
-      seatIds: this.selectedSeatIds
+      seatIds: this.selectedSeatIds,
+      usePoints: this.usePoints
     };
 
-    console.log("Trimit rezervarea pentru user-ul:", payload.userId);
+    console.log("Trimit rezervarea:", payload);
 
     this.http.post('http://localhost:8080/api/bookings/reserve', payload, { responseType: 'text' })
       .subscribe({
@@ -88,7 +96,11 @@ export class SeatSelection implements OnInit {
           alert(res);
           this.router.navigate(['/home']);
         },
-        error: (err) => alert("Eroare la rezervare!")
+        error: (err) => {
+          // Extragem mesajul de eroare din backend (ex: varsta)
+          const msg = err.error || "Eroare la rezervare!";
+          alert(msg);
+        }
       });
   }
 }

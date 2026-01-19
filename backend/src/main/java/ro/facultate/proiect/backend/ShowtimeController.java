@@ -22,6 +22,11 @@ public class ShowtimeController {
         return showtimeRepository.getShowtimeById(id);
     }
 
+    @GetMapping("/movie/{movieId}")
+    public List<Showtime> getShowtimesByMovie(@PathVariable int movieId) {
+        return showtimeRepository.getShowtimesByMovieId(movieId);
+    }
+
     @PostMapping
     public String addShowtime(@RequestBody Showtime showtime) {
         showtimeRepository.addShowtime(showtime);

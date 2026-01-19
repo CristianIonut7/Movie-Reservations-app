@@ -5,12 +5,11 @@
     <div class="cinema-hall">
         <div *ngFor="let row of rows" class="seat-row">
             <div class="row-label">{{ getRowLabel(row[0].rowNumber) }}</div>
-            
+
             <div class="row-seats">
-                <div *ngFor="let seat of row" 
-                     class="seat" 
-                     [ngClass]="{'occupied': seat.occupied, 'selected': isSelected(seat.seatId)}"
-                     (click)="toggleSeat(seat)">
+                <div *ngFor="let seat of row" class="seat"
+                    [ngClass]="{'occupied': seat.occupied, 'selected': isSelected(seat.seatId)}"
+                    (click)="toggleSeat(seat)">
                     {{ seat.seatNumber }}
                 </div>
             </div>
@@ -19,6 +18,26 @@
 
     <div class="summary" *ngIf="selectedSeatIds.length > 0">
         <p>Ai selectat {{ selectedSeatIds.length }} locuri.</p>
+
+        <div class="loyalty-section">
+            <p>Puncte de loialitate disponibile: <strong>{{ userPoints }}</strong></p>
+            <div class="toggle-wrapper" *ngIf="userPoints >= 100"
+                [style.opacity]="selectedSeatIds.length > 2 ? '0.5' : '1'">
+                <label class="switch">
+                    <input type="checkbox" [(ngModel)]="usePoints" [disabled]="selectedSeatIds.length > 2">
+                    <span class="slider round"></span>
+                </label>
+                <span class="toggle-label">Folosește 100 puncte (max 2 gratis)</span>
+            </div>
+            <p *ngIf="selectedSeatIds.length > 2 && userPoints >= 100"
+                style="color: var(--danger-color); font-size: 0.9rem;">
+                *Reducerea se poate aplica doar pentru maxim 2 locuri.
+            </p>
+            <p *ngIf="userPoints < 100" class="fidelity-info">
+                *Ai nevoie de 100 de puncte pentru o reducere.
+            </p>
+        </div>
+
         <button (click)="confirmBooking()">Confirmă Rezervarea</button>
     </div>
 </div>

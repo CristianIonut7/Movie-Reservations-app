@@ -1,16 +1,18 @@
 .login-container {
   max-width: 400px;
-  margin: 50px auto; /* Centrează pe orizontală și lasă spațiu sus */
+  margin: 50px auto;
   padding: 2rem;
-  background: white;
+  background: var(--bg-card);
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  /* Shadow more visible on dark */
+  font-family: var(--font-family);
+  border: 1px solid #333;
 }
 
 h2 {
   text-align: center;
-  color: #333;
+  color: var(--primary-color);
   margin-bottom: 1.5rem;
 }
 
@@ -21,27 +23,29 @@ form div {
 label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #666;
+  color: var(--text-muted);
 }
 
 input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: white;
   border-radius: 4px;
   font-size: 1rem;
-  box-sizing: border-box; /* Asigură că padding-ul nu lățește inputul */
+  box-sizing: border-box;
 }
 
 input:focus {
-  border-color: #e50914;
+  border-color: var(--primary-color);
   outline: none;
 }
 
 button {
   width: 100%;
   padding: 12px;
-  background-color: #e50914;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 4px;
@@ -51,5 +55,5 @@ button {
 }
 
 button:hover {
-  background-color: #b20710;
+  background-color: var(--primary-hover);
 }

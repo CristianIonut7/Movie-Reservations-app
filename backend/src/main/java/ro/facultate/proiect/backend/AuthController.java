@@ -70,4 +70,61 @@ public class AuthController {
             return ResponseEntity.status(400).body("Eroare la actualizare.");
         }
     }
+
+    // Endpoint helper pentru a lua datele user-ului (inclusiv puncte) după ID
+    @org.springframework.web.bind.annotation.GetMapping("/user/{id}")
+    public ResponseEntity<?> getUserById(@org.springframework.web.bind.annotation.PathVariable int id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            User u = user.get();
+            u.setPasswordHash(null); // Ascundem parola
+            return ResponseEntity.ok(u);
+        }
+        return ResponseEntity.status(404).body("User not found");
+    }
+
+    // DTO pentru schimbarea parolei
+    public static class ChangePasswordRequest {
+        public int userId;
+        public String oldPassword;
+        public String newPassword;
+    }
+
+    @PostMapping("/update-password")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordRequest req) {
+        Optional<User> userOpt = userRepository.findById(req.userId);
+        
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.status(404).body("Utilizatorul nu există.");
+        }
+
+        User user = userOpt.get();
+
+        // 1. Verificăm parola veche
+        if (!passwordEncoder.matches(req.oldPassword, user.getPasswordHash())) {
+            return ResponseEntity.status(400).body("Parola veche este incorectă.");
+        }
+
+        // 2. Hash noua parolă
+        String newHash = passwordEncoder.encode(req.newPassword);
+
+        // 3. Update în DB
+        boolean success = userRepository.updatePassword(req.userId, newHash);
+        
+        if (success) {
+            return ResponseEntity.ok("Parola a fost schimbată cu succes!");
+        } else {
+            return ResponseEntity.status(500).body("Eroare la schimbarea parolei.");
+        }
+    }
+
+    @org.springframework.web.bind.annotation.DeleteMapping("/delete-account/{id}")
+    public ResponseEntity<String> deleteAccount(@org.springframework.web.bind.annotation.PathVariable int id) {
+        boolean success = userRepository.deleteUser(id);
+        if (success) {
+            return ResponseEntity.ok("Cont șters cu succes.");
+        } else {
+            return ResponseEntity.status(500).body("Nu s-a putut șterge contul.");
+        }
+    }
 }

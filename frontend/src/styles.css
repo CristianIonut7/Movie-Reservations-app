@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    /* Emerald Green Theme */
+    --primary-color: #2EBD6B;
+    --primary-hover: #25a25a;
+    --bg-dark: #121212;
+    --bg-card: #1e1e1e;
+    --text-color: #ffffff;
+    --text-muted: #b3b3b3;
+    --danger-color: #e50914;
+    --warning-color: #ffd700;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+}
+
+/* Utilitare */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover) !important;
+}
+
+.btn-danger {
+    background-color: var(--danger-color) !important;
+    color: white !important;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}

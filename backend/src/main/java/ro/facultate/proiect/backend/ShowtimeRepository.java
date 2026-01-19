@@ -48,4 +48,17 @@ public class ShowtimeRepository {
         String sql = "DELETE FROM Showtimes WHERE ShowtimeID = ?";
         jdbcTemplate.update(sql, id);
     }
+
+    public List<Showtime> getShowtimesByMovieId(int movieId) {
+        String sql = "SELECT s.ShowtimeID as showtimeID, s.MovieID as movieID, s.RoomID as roomID, " +
+                "s.StartTime as startTime, s.TicketPrice as ticketPrice, " +
+                "m.Title as movieTitle, r.RoomType as roomType " +
+                "FROM Showtimes s " +
+                "LEFT JOIN Movies m ON s.MovieID = m.MovieID " +
+                "LEFT JOIN Rooms r ON s.RoomID = r.RoomID " +
+                "WHERE s.MovieID = ? " +
+                "ORDER BY s.StartTime DESC";
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Showtime.class), movieId);
+    }
 }

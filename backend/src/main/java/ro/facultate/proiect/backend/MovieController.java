@@ -47,4 +47,10 @@ public class MovieController {
     public List<ShowtimeDTO> getShowtimes() {
         return movieRepository.getAllShowtimes();
     }
+
+    // --- Search Endpoint ---
+    @GetMapping("/search")
+    public List<Movie> searchMovies(@RequestParam(required = false) String query, @RequestParam(required = false) String genre) {
+        return movieRepository.searchMovies(query, genre);
+    }
 }
