@@ -24,6 +24,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/movies/**").permitAll()
+                        .requestMatchers("/api/showtimes/**").permitAll()
+                        .requestMatchers("/api/admin/**").permitAll()
                         .requestMatchers("/api/bookings/**").permitAll()
                         .requestMatchers("/api/booking/**").permitAll()
                         .anyRequest().authenticated());

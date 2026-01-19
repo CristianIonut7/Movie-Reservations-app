@@ -21,6 +21,8 @@ export class Navbar implements OnInit {
     this.checkLoginStatus();
   }
 
+  
+
   checkLoginStatus() {
     const user = localStorage.getItem('currentUser');
     if (user) {

@@ -1,11 +1,16 @@
+ro\facultate\proiect\backend\Movie.class
+ro\facultate\proiect\backend\Showtime.class
 ro\facultate\proiect\backend\ShowtimeDTO.class
 ro\facultate\proiect\backend\BackendApplication.class
 ro\facultate\proiect\backend\SeatDTO.class
+ro\facultate\proiect\backend\AdminDashboardController.class
 ro\facultate\proiect\backend\AuthController.class
 ro\facultate\proiect\backend\SecurityConfig.class
+ro\facultate\proiect\backend\ShowtimeController.class
 ro\facultate\proiect\backend\UserRepository.class
 ro\facultate\proiect\backend\BookingRepository.class
 ro\facultate\proiect\backend\MovieRepository.class
+ro\facultate\proiect\backend\ShowtimeRepository.class
 ro\facultate\proiect\backend\BookingController.class
 ro\facultate\proiect\backend\AdminRepository.class
 ro\facultate\proiect\backend\MovieController.class

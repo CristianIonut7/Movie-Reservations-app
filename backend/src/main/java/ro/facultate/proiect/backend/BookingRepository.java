@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class BookingRepository {
@@ -56,5 +57,32 @@ public class BookingRepository {
         for (Integer seatId : seatIds) {
             jdbcTemplate.update(bookedSeatSql, bookingId, seatId);
         }
+    }
+
+    public List<Map<String, Object>> getUserBookings(int userId) {
+        // Interogare complexă (JOIN) conform cerinței 4
+        // Nu afișăm ID-uri, ci informații relevante: Titlu, Dată, Status
+        String sql = "SELECT b.BookingID, m.Title, s.StartTime, b.BookingTime, b.Status, " +
+                "(SELECT STRING_AGG(se.SeatNumber, ', ') " +
+                " FROM BookedSeats bs JOIN Seats se ON bs.SeatID = se.SeatID " +
+                " WHERE bs.BookingID = b.BookingID) AS Seats " +
+                "FROM Bookings b " +
+                "JOIN Showtimes s ON b.ShowtimeID = s.ShowtimeID " +
+                "JOIN Movies m ON s.MovieID = m.MovieID " +
+                "WHERE b.UserID = ? " +
+                "ORDER BY b.BookingTime DESC";
+
+        return jdbcTemplate.queryForList(sql, userId);
+    }
+
+    @Transactional
+    public void cancelBooking(int bookingId) {
+        // 1. Ștergem locurile rezervate (tabelul de legătură N:N)
+        String sqlSeats = "DELETE FROM BookedSeats WHERE BookingID = ?";
+        jdbcTemplate.update(sqlSeats, bookingId);
+
+        // 2. Ștergem rezervarea propriu-zisă
+        String sqlBooking = "DELETE FROM Bookings WHERE BookingID = ?";
+        jdbcTemplate.update(sqlBooking, bookingId);
     }
 }

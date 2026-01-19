@@ -32,4 +32,18 @@ public class BookingController {
             return ResponseEntity.status(400).body("Eroare la rezervare: " + e.getMessage());
         }
     }
+
+    // Endpoint pentru lista de rezervări (Cerința: Interogare complexă cu JOIN)
+    // [cite: 36]
+    @GetMapping("/user/{userId}")
+    public List<Map<String, Object>> getBookings(@PathVariable int userId) {
+        return bookingRepository.getUserBookings(userId);
+    }
+
+    // Endpoint pentru ștergere (Cerința: Delete pe minim 2 tabele) [cite: 35]
+    @DeleteMapping("/{bookingId}")
+    public ResponseEntity<String> delete(@PathVariable int bookingId) {
+        bookingRepository.cancelBooking(bookingId);
+        return ResponseEntity.ok("Rezervarea a fost anulată cu succes!");
+    }
 }

@@ -5,6 +5,7 @@ import { Home } from './pages/home/home';
 import { Profile } from './pages/profile/profile';
 import { SeatSelection } from './pages/seat-selection/seat-selection';
 import { AdminDashboard } from './pages/admin/admin-dashboard';
+import { MyBookingsComponent } from './pages/my-bookings/my-bookings';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'home', component: Home },
   { path: 'profile', component: Profile },
   { path: 'booking/:id', component: SeatSelection },
-  { path: 'admin', component: AdminDashboard }
+  { path: 'admin', component: AdminDashboard },
+  { path: 'my-bookings', component: MyBookingsComponent }
 ];

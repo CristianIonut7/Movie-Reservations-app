@@ -1,0 +1,25 @@
+<div class="bookings-container">
+  <h2>Rezervările mele</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Film</th>
+        <th>Ora Difuzare</th>
+        <th>Locuri</th>
+        <th>Status</th>
+        <th>Acțiuni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of bookings">
+        <td>{{ b.Title }}</td>
+        <td>{{ b.StartTime | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ b.Seats }}</td>
+        <td><span class="status-badge">{{ b.Status }}</span></td>
+        <td>
+          <button class="btn-cancel" (click)="confirmCancel(b.BookingID)">Anulează</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
