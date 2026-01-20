@@ -77,6 +77,7 @@ CREATE TABLE Bookings (
     ShowtimeID INT NOT NULL,
     BookingTime DATETIME DEFAULT GETDATE(),
     [Status] VARCHAR(20) NOT NULL,
+    PaidPrice DECIMAL(10, 2),
     
     CONSTRAINT FK_Bookings_Users FOREIGN KEY (UserID)
         REFERENCES Users(UserID),
@@ -84,7 +85,9 @@ CREATE TABLE Bookings (
     CONSTRAINT FK_Bookings_Showtimes FOREIGN KEY (ShowtimeID)
         REFERENCES Showtimes(ShowtimeID),
         
-    CONSTRAINT CHK_BookingStatus CHECK ([Status] IN ('Confirmed', 'Pending', 'Cancelled'))
+    CONSTRAINT CHK_BookingStatus CHECK ([Status] IN ('Confirmed', 'Pending', 'Cancelled')),
+    
+    CONSTRAINT CHK_PaidPrice CHECK (PaidPrice >= 0)
 );
 GO
 

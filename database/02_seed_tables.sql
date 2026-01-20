@@ -1,12 +1,12 @@
 PRINT 'Populating Users table...';
 INSERT INTO Users (FirstName, LastName, Email, PasswordHash, UserRole, Age, City, LoyaltyPoints)
 VALUES 
-('Admin', 'Principal', 'admin@cinema.com', 'admin_hash_placeholder', 'admin', 30, 'Bucharest', 0),
-('Cristian', 'Popescu', 'cristian@email.com', 'client_hash_placeholder', 'client', 21, 'Bucharest', 150),
-('Andrei', 'Ionescu', 'andrei@email.com', 'client_hash_placeholder', 'client', 25, 'Cluj-Napoca', 75),
-('Maria', 'Georgescu', 'maria@email.com', 'client_hash_placeholder', 'client', 29, 'Timisoara', 320),
-('Elena', 'Vasilescu', 'elena@email.com', 'client_hash_placeholder', 'client', 19, 'Iasi', 50),
-('Mihai', 'Radu', 'mihai@email.com', 'client_hash_placeholder', 'client', 35, 'Bucharest', 210);
+('Admin', 'Principal', 'admin@cinema.com', '$2a$10$SsBdPCnQ.ZdpH30Du8I7S.ngs/EOxYyeW0B9KB1Bv36K4BtM9Bp7G', 'admin', 30, 'Bucharest', 0),
+('Cristian', 'Popescu', 'cristian@email.com', '$2a$10$xM1UUGwPOKb/FL9XDwlFGeIfLOQY8PSCEEYvCI9uUBeKBNkC63Kfe', 'client', 21, 'Bucharest', 150),
+('Andrei', 'Ionescu', 'andrei@email.com', '$2a$10$xM1UUGwPOKb/FL9XDwlFGeIfLOQY8PSCEEYvCI9uUBeKBNkC63Kfe', 'client', 25, 'Cluj-Napoca', 75),
+('Maria', 'Georgescu', 'maria@email.com', '$2a$10$xM1UUGwPOKb/FL9XDwlFGeIfLOQY8PSCEEYvCI9uUBeKBNkC63Kfe', 'client', 29, 'Timisoara', 320),
+('Elena', 'Vasilescu', 'elena@email.com', '$2a$10$xM1UUGwPOKb/FL9XDwlFGeIfLOQY8PSCEEYvCI9uUBeKBNkC63Kfe', 'client', 19, 'Iasi', 50),
+('Mihai', 'Radu', 'mihai@email.com', '$2a$10$xM1UUGwPOKb/FL9XDwlFGeIfLOQY8PSCEEYvCI9uUBeKBNkC63Kfe', 'client', 35, 'Bucharest', 210);
 GO
 
 PRINT 'Populating Movies table...';
@@ -56,12 +56,12 @@ VALUES
 GO
 
 PRINT 'Populating Bookings table...';
-INSERT INTO Bookings (UserID, ShowtimeID, [Status])
+INSERT INTO Bookings (UserID, ShowtimeID, [Status], PaidPrice)
 VALUES
-(2, 1, 'Confirmed'),
-(3, 3, 'Confirmed'),
-(4, 6, 'Pending'),
-(2, 4, 'Confirmed');
+(2, 1, 'Confirmed', 35.50),
+(3, 3, 'Confirmed', 32.00),
+(4, 6, 'Pending', 50.00),
+(2, 4, 'Confirmed', 25.00);
 GO
 
 PRINT 'Populating BookedSeats (N:N relationship)...';
