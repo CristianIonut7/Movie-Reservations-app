@@ -40,11 +40,6 @@ public class MovieController {
         return "Movie deleted successfully";
     }
 
-    @GetMapping("/showtimes")
-    public List<ShowtimeDTO> getShowtimes() {
-        return movieRepository.getAllShowtimes();
-    }
-
     @GetMapping("/search")
     public List<Movie> searchMovies(@RequestParam(required = false) String query, @RequestParam(required = false) String genre) {
         return movieRepository.searchMovies(query, genre);

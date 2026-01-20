@@ -33,7 +33,7 @@ public class BookingRepository {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(SeatDTO.class), showtimeId, showtimeId);
     }
 
-    // Simple 6: Interogare cu JOIN intre 2 tabele in interiorul metodei (createBooking nu este o interogare simpla, dar contine una).
+    // Simple 5: Interogare cu JOIN intre 2 tabele in interiorul metodei (createBooking nu este o interogare simpla, dar contine una).
     @Transactional
     public void createBooking(int userId, int showtimeId, List<Integer> seatIds, boolean usePoints) {
         String userSql = "SELECT Age, LoyaltyPoints FROM Users WHERE UserID = ?";
@@ -93,16 +93,17 @@ public class BookingRepository {
         }
     }
 
-    // Complex 5: Subcerere in clauza SELECT (STRING_AGG). Lista rezervarilor unui utilizator cu locurile concatenate.
+    // Simple 6: Interogare cu JOIN intre 5 tabele si grupare (fostul Complex 5). Lista rezervarilor unui utilizator cu locurile concatenate.
     public List<Map<String, Object>> getUserBookings(int userId) {
         String sql = "SELECT b.BookingID, m.Title, s.StartTime, b.BookingTime, b.Status, b.PaidPrice, " +
-                "(SELECT STRING_AGG(CONCAT(CHAR(64 + se.RowNumber), se.SeatNumber), ', ') " +
-                " FROM BookedSeats bs JOIN Seats se ON bs.SeatID = se.SeatID " +
-                " WHERE bs.BookingID = b.BookingID) AS Seats " +
+                "STRING_AGG(CONCAT(CHAR(64 + se.RowNumber), se.SeatNumber), ', ') AS Seats " +
                 "FROM Bookings b " +
                 "JOIN Showtimes s ON b.ShowtimeID = s.ShowtimeID " +
                 "JOIN Movies m ON s.MovieID = m.MovieID " +
+                "LEFT JOIN BookedSeats bs ON b.BookingID = bs.BookingID " +
+                "LEFT JOIN Seats se ON bs.SeatID = se.SeatID " +
                 "WHERE b.UserID = ? " +
+                "GROUP BY b.BookingID, m.Title, s.StartTime, b.BookingTime, b.Status, b.PaidPrice " +
                 "ORDER BY b.BookingTime DESC";
 
         return jdbcTemplate.queryForList(sql, userId);

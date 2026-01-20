@@ -40,22 +40,6 @@ public class MovieRepository {
         String sql = "DELETE FROM Movies WHERE MovieID = ?";
         jdbcTemplate.update(sql, id);
     }
-    
-    // Simple 5: Interogare cu JOIN intre 3 tabele. Lista difuzarilor pentru afisarea pe prima pagina.
-    public List<ShowtimeDTO> getAllShowtimes() {
-        String sql = "SELECT s.ShowtimeID AS showtimeId, " +
-                "m.Title AS movieTitle, " + 
-                "m.Genre AS genre, " +
-                "r.RoomType AS roomType, " +
-                "s.StartTime AS startTime, " +
-                "s.TicketPrice AS ticketPrice, " +
-                "s.ShowtimeID AS showtimeId " + 
-                "FROM Showtimes s " +
-                "JOIN Movies m ON s.MovieID = m.MovieID " +
-                "JOIN Rooms r ON s.RoomID = r.RoomID";
-
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ShowtimeDTO.class));
-    }
 
     public List<Movie> searchMovies(String query, String genre) {
         StringBuilder sql = new StringBuilder("SELECT * FROM Movies WHERE 1=1");
