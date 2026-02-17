@@ -2,8 +2,12 @@
 
 A full-stack cinema reservation system that allows users to browse movies, view showtimes, and book seats. Administrators can manage movies, users and schedules.
 
+<<<<<<< HEAD
 ![Application Dashboard Placeholder](path/to/dashboard-screenshot.png)
 *Replace this with a screenshot of the main dashboard*
+=======
+![Application Dashboard](screenshots/main-dashboard.png)
+>>>>>>> 618223efc342804686e13538a7b50e41259699bb
 
 ## Features
 
@@ -38,8 +42,12 @@ Ensure you have the following installed:
 3.  Execute the script `database/01_create_tables.sql` to create the schema.
 4.  Execute the script `database/02_seed_tables.sql` to populate initial data.
 
+<<<<<<< HEAD
 ![Database Schema Placeholder](path/to/db-schema-screenshot.png)
 *Replace with a screenshot of your database diagram or tables*
+=======
+![Database Diagram](screenshots/DatabaseDiagram)
+>>>>>>> 618223efc342804686e13538a7b50e41259699bb
 
 ### 2. Backend Setup
 
@@ -81,6 +89,7 @@ Ensure you have the following installed:
     ```
 4.  Open your browser and navigate to `http://localhost:4200`.
 
+<<<<<<< HEAD
 ![Login Page Placeholder](path/to/login-screenshot.png)
 *Replace with a screenshot of the Login page*
 
@@ -93,3 +102,14 @@ Here you can add more screenshots to showcase the application flow.
 
 ### Seat Booking
 ![Seat Booking Placeholder](path/to/seat-booking-screenshot.png)
+=======
+![Login Page](screenshots/login.png)
+
+## Application Screenshots
+
+### Showtime Selection
+![Showtime Selection](screenshots/showtime-selection.png)
+
+### Seat Booking
+![Seat Booking](screenshots/seat-selection.png)
+>>>>>>> 618223efc342804686e13538a7b50e41259699bb
