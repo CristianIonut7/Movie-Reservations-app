@@ -1,8 +1,90 @@
 # Movie Reservation App
-This is a full-stack project implementing a system for cinema reservations  
 
-## Technologies used
+A full-stack cinema reservation system that allows users to browse movies, view showtimes, and book seats. Administrators can manage movies, users and schedules.
 
-* **Backend:** Java (Spring Boot)
-* **Frontend:** Angular
-* **Database:** Microsoft SQL Server 2022
+![Application Dashboard](screenshots/main-dashboard.png)
+
+## Features
+
+*   **User Authentication**: Secure registration and login for clients and admins.
+*   **Movie Management**: Browse current listings, view details, and search by genre.
+*   **Interactive Booking**: Select cinema rooms and specific seats visually.
+*   **Role-Based Access**:
+    *   **Clients**: Book tickets, view history, manage profile.
+    *   **Admins**: Add movies, manage showtimes, configure rooms.
+
+## Technologies Used
+
+*   **Backend**: Java 17, Spring Boot 3.5.7, Hibernate/JPA
+*   **Frontend**: Angular 20.3.0, TypeScript, SCSS
+*   **Database**: Microsoft SQL Server 2022
+*   **Build Tools**: Maven (Backend), npm/Angular CLI (Frontend)
+
+## Prerequisites
+
+Ensure you have the following installed:
+
+*   [Java JDK 17](https://www.oracle.com/java/technologies/downloads/#java17) or higher
+*   [Node.js](https://nodejs.org/) (LTS version recommended)
+*   [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (Express or Standard)
+
+## Installation & Setup
+
+### 1. Database Setup
+
+1.  Open SQL Server Management Studio (SSMS) or your preferred SQL tool.
+2.  Create a new database named `MovieReservationDB` (or run the scripts directly as they might handle it).
+3.  Execute the script `database/01_create_tables.sql` to create the schema.
+4.  Execute the script `database/02_seed_tables.sql` to populate initial data.
+
+![Database Diagram](screenshots/DatabaseDiagram)
+
+### 2. Backend Setup
+
+1.  Navigate to the `backend` directory:
+    ```bash
+    cd backend
+    ```
+2.  Open `src/main/resources/application.properties` and configure your database credentials:
+    ```properties
+    spring.datasource.url=jdbc:sqlserver://localhost\\SQLEXPRESS01;databaseName=MovieReservationDB;trustServerCertificate=true
+    spring.datasource.username=YOUR_USERNAME  # Default: sa
+    spring.datasource.password=YOUR_PASSWORD  # Default in project: aplicatienebuna
+    ```
+    > **Note**: The default password in the project is `aplicatienebuna`. Update it to match your local SQL Server instance.
+
+3.  Run the application using Maven:
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+    The backend server will start on port 8080 (default).
+
+### 3. Frontend Setup
+
+1.  Navigate to the `frontend` directory:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Start the development server:
+    ```bash
+    npm start
+    ```
+    Or if you have Angular CLI installed globally:
+    ```bash
+    ng serve
+    ```
+4.  Open your browser and navigate to `http://localhost:4200`.
+
+![Login Page](screenshots/login.png)
+
+## Application Screenshots
+
+### Showtime Selection
+![Showtime Selection](screenshots/showtime-selection.png)
+
+### Seat Booking
+![Seat Booking](screenshots/seat-selection.png)
