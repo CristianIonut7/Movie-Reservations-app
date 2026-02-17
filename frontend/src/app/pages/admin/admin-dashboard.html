@@ -9,9 +9,7 @@
         </div>
     </div>
 
-    <!-- STATS TAB -->
     <div *ngIf="activeTab === 'stats'" class="stats-grid">
-        <!-- Complex 1 -->
         <div class="stat-card">
             <h3>Top 3 Filme (Bilete)</h3>
             <ul>
@@ -21,7 +19,6 @@
             </ul>
         </div>
 
-        <!-- Complex 2 -->
         <div class="stat-card">
             <h3>Clienti VIP</h3>
             <ul>
@@ -33,7 +30,6 @@
             </ul>
         </div>
 
-        <!-- Complex 4 & Simple 6 -->
         <div class="stat-card">
             <h3>Info Diverse</h3>
             <strong>Fara rezervari:</strong>
@@ -47,7 +43,6 @@
             </ul>
         </div>
 
-        <!-- Simple 4 -->
         <div class="stat-card">
             <h3>Venituri per Film</h3>
             <ul>
@@ -58,7 +53,6 @@
         </div>
     </div>
 
-    <!-- MOVIES TAB -->
     <div *ngIf="activeTab === 'movies'" class="crud-section">
         <h3>{{ isEditingMovie ? 'Modifica Film' : 'Adauga Film Nou' }}</h3>
 
@@ -129,7 +123,6 @@
         </table>
     </div>
 
-    <!-- SHOWTIMES TAB -->
     <div *ngIf="activeTab === 'showtimes'" class="crud-section">
         <h3>{{ isEditingShowtime ? 'Modifica Difuzare' : 'Programeaza Difuzare Noua' }}</h3>
 

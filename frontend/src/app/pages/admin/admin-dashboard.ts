@@ -48,7 +48,6 @@ export class AdminDashboard implements OnInit {
     ticketPrice: 0
   };
 
-  // Util
   rooms: any[] = [
     { RoomID: 1, RoomType: 'Normal' },
     { RoomID: 2, RoomType: 'VIP' },
@@ -70,7 +69,6 @@ export class AdminDashboard implements OnInit {
     }
   }
 
-  // --- STATS ---
   loadStats() {
     this.http.get<any[]>('http://localhost:8080/api/admin/top-movies').subscribe(data => this.topMovies = data);
     this.http.get<any[]>('http://localhost:8080/api/admin/vip-clients').subscribe(data => this.vipClients = data);
@@ -88,14 +86,13 @@ export class AdminDashboard implements OnInit {
       });
   }
 
-  // --- MOVIES CRUD ---
   loadMovies() {
     this.http.get<any[]>('http://localhost:8080/api/movies').subscribe(data => this.movies = data);
   }
 
   editMovie(movie: any) {
     this.isEditingMovie = true;
-    this.newMovie = { ...movie }; // Copy object
+    this.newMovie = { ...movie };
   }
 
   cancelEditMovie() {
@@ -105,14 +102,12 @@ export class AdminDashboard implements OnInit {
 
   saveMovie() {
     if (this.isEditingMovie) {
-      // UPDATE
       this.http.put(`http://localhost:8080/api/movies/${this.newMovie.movieID}`, this.newMovie, { responseType: 'text' }).subscribe(() => {
         alert('Film actualizat!');
         this.loadMovies();
         this.cancelEditMovie();
       });
     } else {
-      // INSERT
       this.http.post('http://localhost:8080/api/movies', this.newMovie, { responseType: 'text' }).subscribe(() => {
         alert('Film adăugat!');
         this.loadMovies();
@@ -127,7 +122,6 @@ export class AdminDashboard implements OnInit {
     }
   }
 
-  // --- SHOWTIMES CRUD ---
   loadShowtimes() {
     this.http.get<any[]>('http://localhost:8080/api/showtimes').subscribe(data => this.showtimes = data);
   }
